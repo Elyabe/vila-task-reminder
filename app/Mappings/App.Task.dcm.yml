@@ -1,0 +1,27 @@
+# App.Article.dcm.yml
+App\Task:
+  type: entity
+  table: tasks
+  id:
+    id:
+      type: guid
+      generator:
+        strategy: UUID
+  fields:
+    title:
+      type: string
+    date:
+      type: date
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at
+  manyToOne:
+    user:
+      targetEntity: User
+      joinColumns:
+        user_id:
+          nullable: false
+          referencedColumnName: id

@@ -1,0 +1,31 @@
+# App.Article.dcm.yml
+App\User:
+  type: entity
+  table: users
+  id:
+    id:
+      type: guid
+      generator:
+        strategy: UUID
+  fields:
+    email:
+      type: string
+    cpf:
+      type: string
+    password:
+      type: string
+    phoneNumber:
+      type: string
+      column: phone_number
+    remeberToken:
+      type: string
+      column: remember_token
+      nullable: true
+    emailVerifiedAt:
+      type: datetime
+      column: email_verified_at
+      nullable: true
+    createdAt:
+      type: datetime
+    updatedAt:
+      type: datetime

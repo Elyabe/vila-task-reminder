@@ -25,9 +25,10 @@ return [
             'dev'           => env('APP_DEBUG', false),
             'meta'          => env('DOCTRINE_METADATA', 'annotations'),
             'connection'    => env('DB_CONNECTION', 'mysql'),
-            'namespaces'    => [],
+            'namespaces'    => ['App'],
             'paths'         => [
-                base_path('app/Entities')
+                base_path('app/Mappings'),
+                base_path('app/Entities'),
             ],
             'repository'    => Doctrine\ORM\EntityRepository::class,
             'proxies'       => [
@@ -88,16 +89,16 @@ return [
     |
     */
     'extensions'                 => [
-        //LaravelDoctrine\ORM\Extensions\TablePrefix\TablePrefixExtension::class,
-        //LaravelDoctrine\Extensions\Timestamps\TimestampableExtension::class,
-        //LaravelDoctrine\Extensions\SoftDeletes\SoftDeleteableExtension::class,
-        //LaravelDoctrine\Extensions\Sluggable\SluggableExtension::class,
-        //LaravelDoctrine\Extensions\Sortable\SortableExtension::class,
-        //LaravelDoctrine\Extensions\Tree\TreeExtension::class,
-        //LaravelDoctrine\Extensions\Loggable\LoggableExtension::class,
-        //LaravelDoctrine\Extensions\Blameable\BlameableExtension::class,
-        //LaravelDoctrine\Extensions\IpTraceable\IpTraceableExtension::class,
-        //LaravelDoctrine\Extensions\Translatable\TranslatableExtension::class
+        LaravelDoctrine\ORM\Extensions\TablePrefix\TablePrefixExtension::class,
+        LaravelDoctrine\Extensions\Timestamps\TimestampableExtension::class,
+        LaravelDoctrine\Extensions\SoftDeletes\SoftDeleteableExtension::class,
+        LaravelDoctrine\Extensions\Sluggable\SluggableExtension::class,
+        LaravelDoctrine\Extensions\Sortable\SortableExtension::class,
+        LaravelDoctrine\Extensions\Tree\TreeExtension::class,
+        LaravelDoctrine\Extensions\Loggable\LoggableExtension::class,
+        LaravelDoctrine\Extensions\Blameable\BlameableExtension::class,
+        LaravelDoctrine\Extensions\IpTraceable\IpTraceableExtension::class,
+        LaravelDoctrine\Extensions\Translatable\TranslatableExtension::class
     ],
     /*
     |--------------------------------------------------------------------------
@@ -107,8 +108,7 @@ return [
     | Create a custom or override a Doctrine Type
     |--------------------------------------------------------------------------
     */
-    'custom_types'               => [
-    ],
+    'custom_types'               => [],
     /*
     |--------------------------------------------------------------------------
     | DQL custom datetime functions
@@ -187,7 +187,7 @@ return [
     |
     */
     'gedmo'                      => [
-        'all_mappings' => false
+        'all_mappings' => true
     ],
     /*
      |--------------------------------------------------------------------------
