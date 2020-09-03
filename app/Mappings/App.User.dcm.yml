@@ -17,7 +17,8 @@ App\User:
     phoneNumber:
       type: string
       column: phone_number
-    remeberToken:
+      nullable: true
+    rememberToken:
       type: string
       column: remember_token
       nullable: true

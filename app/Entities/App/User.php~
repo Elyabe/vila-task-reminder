@@ -3,8 +3,6 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
-use Indaxia\OTR\ITransformable;
-use Indaxia\OTR\Traits\Transformable;
 
 /**
  * User
@@ -12,10 +10,8 @@ use Indaxia\OTR\Traits\Transformable;
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class User implements ITransformable
+class User
 {
-    use Transformable;
-
     /**
      * @var string
      *
@@ -189,30 +185,6 @@ class User implements ITransformable
     }
 
     /**
-     * Set rememberToken.
-     *
-     * @param string|null $rememberToken
-     *
-     * @return User
-     */
-    public function setRememberToken($rememberToken = null)
-    {
-        $this->rememberToken = $rememberToken;
-
-        return $this;
-    }
-
-    /**
-     * Get rememberToken.
-     *
-     * @return string|null
-     */
-    public function getRememberToken()
-    {
-        return $this->rememberToken;
-    }
-
-    /**
      * Set emailVerifiedAt.
      *
      * @param \DateTime|null $emailVerifiedAt
@@ -237,20 +209,6 @@ class User implements ITransformable
     }
 
     /**
-     * Set createdAt.
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return User
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt.
      *
      * @return \DateTime
@@ -258,20 +216,6 @@ class User implements ITransformable
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt.
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return User
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
