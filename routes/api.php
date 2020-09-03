@@ -13,13 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+// Users routes
+Route::get('users', 'Api\UserController@findAll');
+Route::get('users/{id}', 'Api\UserController@findById');
+Route::post('users', 'Api\UserController@create');
+Route::delete('users/{id}', 'Api\UserController@delete');
 
-Route::get('users', 'Api\UserController@getAll');
-
+// Auth routes
 Route::post('auth/register', 'Api\UserController@create');
 
-Route::get('tasks', 'Api\TaskController@getAll');
+// Task routes
+Route::get('tasks', 'Api\TaskController@findAll');
+Route::get('tasks/{id}', 'Api\TaskController@findById');
 Route::post('tasks', 'Api\TaskController@create');
+Route::delete('tasks/{id}', 'Api\TaskController@delete');

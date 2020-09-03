@@ -13,17 +13,38 @@ use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class TaskController extends Controller
 {
-    public function getAll()
+    public function findAll()
     {
         $policy = new Policy\Auto;
         $policy->inside([
-            'createdAt' => new Policy\To\FormatDateTime(['format' => "Y_m_d"])
+            // 'createdAt' => new Policy\To\FormatDateTime(['format' => "Y_m_d"]),
+            'user' => new Policy\To\Skip(),
         ]);
 
         $tasks =  EntityManager::getRepository('App\Task')->findAll();
         $tasks =  Transformable::toArrays($tasks, $policy);
 
         return response()->json($tasks, 200);
+    }
+
+    public function findById(Request $request)
+    {
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'user' => new Policy\To\Skip(),
+        ]);
+
+        $task =  EntityManager::getRepository('App\Task')->find($request->id);
+
+        if (is_null($task)) {
+            return response()->json([
+                'error' => 'Task not found',
+            ], 400);
+        }
+
+        $parsedTask = $task->toArray($policy);
+
+        return response()->json($parsedTask, 200);
     }
 
     public function create(Request $request)
@@ -59,6 +80,12 @@ class TaskController extends Controller
     public function delete(Request $request)
     {
         $task = EntityManager::find('App\Task', $request->id);
+
+        if (is_null($task)) {
+            return response()->json([
+                'error' => 'Task not found',
+            ], 400);
+        }
 
         EntityManager::remove($task);
         EntityManager::flush();
