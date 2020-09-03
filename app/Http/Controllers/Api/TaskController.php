@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Task;
+use DateTime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Indaxia\OTR\Annotations\Policy;
+use Indaxia\OTR\Traits\Transformable;
+use LaravelDoctrine\ORM\Facades\EntityManager;
+
+class TaskController extends Controller
+{
+    public function getAll()
+    {
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'createdAt' => new Policy\To\FormatDateTime(['format' => "Y_m_d"])
+        ]);
+
+        $tasks =  EntityManager::getRepository('App\Task')->findAll();
+        $tasks =  Transformable::toArrays($tasks, $policy);
+
+        return response()->json($tasks, 200);
+    }
+
+    public function create(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'userId' => 'required|exists:App\User,id',
+            'title' => 'required|string|min:2|max:255',
+            'date' => 'date_format:Y-m-d H:i:s'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], 400);
+        }
+
+
+        $user = EntityManager::getRepository('App\User')->find($request->userId);
+
+        $task = new Task;
+        $task->setTitle($request->title)
+            ->setCreatedAt(new DateTime())
+            ->setUpdatedAt(new DateTime())
+            ->setDate(new DateTime($request->date))
+            ->setUser($user);
+
+        EntityManager::persist($task);
+        EntityManager::flush();
+
+        return response()->json($task->toArray(), 201);
+    }
+
+    public function delete(Request $request)
+    {
+        $task = EntityManager::find('App\Task', $request->id);
+
+        EntityManager::remove($task);
+        EntityManager::flush();
+
+        return response(['statusCode' => 204]);
+    }
+}
