@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
+use DateTime;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use LaravelDoctrine\ORM\Facades\EntityManager;
 
 class VerificationController extends Controller
 {
@@ -34,8 +40,55 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['verify', 'resend']);
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function verify(Request $request)
+    {
+        if (!$request->hasValidSignature()) {
+            throw new ApiException('Invalid or Expired URL provided.', 401);
+        }
+
+        $user = EntityManager::find('App\User', $request->route('id'));
+
+        if (!$user->hasVerifiedEmail()) {
+            $user->setEmailVerifiedAt(new DateTime());
+        }
+
+        try {
+            EntityManager::persist($user);
+            EntityManager::flush();
+
+            event(new Verified($request->user()));
+
+            return response()->json([
+                'message' => 'Email verified.',
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        return response()->json([
+            'message' => 'Email could not be verified.',
+        ], 500);
+    }
+
+    public function resend(Request $request)
+    {
+        echo var_dump(Auth::user());
+        exit;
+        if ($request->user()->hasVerifiedEmail()) {
+            return response()->json([
+                'message' => 'Email already verified.',
+            ]);
+        }
+
+        $request->user()->sendEmailVerificationNotification();
+
+        return response()->json([
+            'message' => 'Notification has been resent',
+        ]);
     }
 }

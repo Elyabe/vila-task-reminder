@@ -71,6 +71,8 @@ class UserController extends Controller
         EntityManager::persist($user);
         EntityManager::flush();
 
+        $user->sendEmailVerificationNotification();
+
         $policy = new Policy\Auto;
         $policy->inside([
             'password' => new Policy\To\Skip

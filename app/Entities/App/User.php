@@ -8,6 +8,10 @@ use Indaxia\OTR\ITransformable;
 use Indaxia\OTR\Traits\Transformable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+use App\Notifications\VerifyEmail;
+use DateTime;
+use LaravelDoctrine\ORM\Notifications\Notifiable;
+
 /**
  * User
  *
@@ -22,6 +26,7 @@ class User implements
 
     use Transformable;
 
+    use Notifiable;
     /**
      * @var string
      *
@@ -323,5 +328,15 @@ class User implements
     public function getRememberTokenName()
     {
         return 'remember_token';
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmail);
+    }
+
+    public function hasVerifiedEmail()
+    {
+        return !is_null($this->emailVerifiedAt);
     }
 }

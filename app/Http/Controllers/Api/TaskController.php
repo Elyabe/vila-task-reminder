@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Task;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Indaxia\OTR\Annotations\Policy;
 use Indaxia\OTR\Traits\Transformable;

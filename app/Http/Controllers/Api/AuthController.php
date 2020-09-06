@@ -19,8 +19,8 @@ class AuthController extends Controller
         $validator = Validator::make(
             $request->only('email', 'password'),
             [
-                'email' => 'required',
-                'password' => 'required',
+                'email' => 'required|email|exists:App\User,email',
+                'password' => 'required|string',
             ]
         );
 
@@ -39,10 +39,6 @@ class AuthController extends Controller
             ->findOneBy([
                 'email' => $email,
             ]);
-
-        if (!$user) {
-            throw new ApiException("Bad Credentials.", 401);
-        }
 
         if (!Hash::check($password, $user->getPassword())) {
             throw new ApiException("Bad Credentials.", 401);
