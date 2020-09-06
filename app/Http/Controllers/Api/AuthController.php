@@ -2,39 +2,69 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Indaxia\OTR\Annotations\Policy;
+
 
 class AuthController extends Controller
 {
     public function authenticate(Request $request)
     {
+        $validator = Validator::make(
+            $request->only('email', 'password'),
+            [
+                'email' => 'required',
+                'password' => 'required',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
         $credentials = $request->only('email', 'password');
-        // return response()->json($credentials);
+
+        $email = $credentials['email'];
+        $password = $credentials['password'];
+
         $user = EntityManager::getRepository('App\User')
             ->findOneBy([
-                'email' => $credentials['email'],
+                'email' => $email,
             ]);
 
-        try {
-            // $token = JWTAuth::attempt($credentials);
-            $token = JWTAuth::fromUser($user);
-
-            if (!$token) {
-                return response()->json([
-                    'error' => 'Bad credentials'
-                ]);
-            }
-
-            return response()->json($token);
-        } catch (\Throwable $th) {
-            echo $th->getMessage();
-            return response()->json([
-                'error' => 'Could not Create Token',
-            ], 500);
+        if (!$user) {
+            throw new ApiException("Bad Credentials.", 401);
         }
+
+        if (!Hash::check($password, $user->getPassword())) {
+            throw new ApiException("Bad Credentials.", 401);
+        }
+
+        $token = JWTAuth::fromUser($user);
+
+        if (!$token) {
+            throw new ApiException("Error Processing Request", 500);
+        }
+
+        $policyHide = new Policy\Auto;
+        $policyHide->inside([
+            'password' => new Policy\To\Skip(),
+            'rememberToken' => new Policy\To\Skip(),
+        ]);
+
+        return response()->json([
+            'acessToken' => $token,
+            'tokenType'  => 'bearer',
+            'expiresIn'  => env('JWT_TTL', 60),
+            'user'       => $user->toArray($policyHide),
+        ]);
     }
 }

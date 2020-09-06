@@ -46,6 +46,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // return parent::render($request, $exception);
+        if ($exception instanceof APIException) {
+            return response()->json([
+                // 'success' => false,
+                // 'data' => [],
+                'error' => $exception->getMessage()
+            ], $exception->getStatusCode());
+        }
+
         return parent::render($request, $exception);
+
+        return response()->json([
+            'error' => 'Internal Server Error',
+        ], 500);
     }
 }
