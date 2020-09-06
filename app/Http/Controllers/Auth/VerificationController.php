@@ -77,15 +77,13 @@ class VerificationController extends Controller
 
     public function resend(Request $request)
     {
-        echo var_dump(Auth::user());
-        exit;
-        if ($request->user()->hasVerifiedEmail()) {
+        if ($request->user('api')->hasVerifiedEmail()) {
             return response()->json([
                 'message' => 'Email already verified.',
             ]);
         }
 
-        $request->user()->sendEmailVerificationNotification();
+        $request->user('api')->sendEmailVerificationNotification();
 
         return response()->json([
             'message' => 'Notification has been resent',

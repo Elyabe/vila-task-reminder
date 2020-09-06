@@ -11,10 +11,11 @@ use Illuminate\Support\Facades\Validator;
 use Indaxia\OTR\Annotations\Policy;
 use Indaxia\OTR\Traits\Transformable;
 use LaravelDoctrine\ORM\Facades\EntityManager;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class TaskController extends Controller
 {
-    public function findAll()
+    public function findAll(Request $request)
     {
         $policy = new Policy\Auto;
         $policy->inside([
