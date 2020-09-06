@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Indaxia\OTR\Traits\Transformable;
 use LaravelDoctrine\ORM\Facades\EntityManager;
@@ -15,7 +16,7 @@ class UserController extends Controller
 {
 
 
-    public function getAll()
+    public function findAll()
     {
         $policy = new Policy\Auto;
         $policy->inside([
@@ -51,15 +52,17 @@ class UserController extends Controller
     public function create(Request $request)
     {
 
-        $policy = new Policy\Auto;
-        $policy->inside([
-            'password' => new Policy\To\Skip
-        ]);
+        if ($this->validator($request->all())->fails()) {
+            return response()->json([
+                'error' => $this->validator($request->all())->errors()
+            ], 400);
+        }
+
 
         $user = new User;
         $user->setEmail($request->email)
             ->setCpf($request->cpf)
-            ->setPassword($request->password)
+            ->setPassword(Hash::make($request->password))
             ->setCreatedAt(new DateTime())
             ->setPhoneNumber($request->phoneNumber)
             ->setUpdatedAt(new DateTime());
@@ -68,6 +71,11 @@ class UserController extends Controller
         EntityManager::persist($user);
         EntityManager::flush();
 
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'password' => new Policy\To\Skip
+        ]);
+
         return response()->json($user->toArray($policy), 201);
     }
 
@@ -75,7 +83,7 @@ class UserController extends Controller
     public function validator($params)
     {
         return  $validator = Validator::make($params, [
-            'email' => 'required|string',
+            'email' => 'required|string|unique:App\User,email',
             'password' => 'required|string'
         ]);
     }

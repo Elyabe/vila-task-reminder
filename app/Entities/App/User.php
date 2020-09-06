@@ -3,8 +3,10 @@
 namespace App;
 
 use Doctrine\ORM\Mapping as ORM;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Indaxia\OTR\ITransformable;
 use Indaxia\OTR\Traits\Transformable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
  * User
@@ -12,8 +14,12 @@ use Indaxia\OTR\Traits\Transformable;
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class User implements ITransformable
+class User implements
+    ITransformable,
+    JWTSubject,
+    Authenticatable
 {
+
     use Transformable;
 
     /**
@@ -282,5 +288,40 @@ class User implements ITransformable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getKey()
+    {
+        return $this->id;
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->getId();
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id';
+    }
+
+    public function getAuthPassword()
+    {
+        $this->getPassword();
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
     }
 }
