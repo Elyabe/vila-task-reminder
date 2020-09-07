@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Task;
 use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -70,7 +71,7 @@ class TaskController extends Controller
         $task->setTitle($request->title)
             ->setCreatedAt(new DateTime())
             ->setUpdatedAt(new DateTime())
-            ->setDate(new DateTime($request->date))
+            ->setDate(new DateTime($request->date, new DateTimeZone('UTC')))
             ->setUser($user);
 
         EntityManager::persist($task);

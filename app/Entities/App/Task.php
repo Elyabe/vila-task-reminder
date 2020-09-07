@@ -10,7 +10,7 @@ use Indaxia\OTR\Traits\Transformable;
  * Task
  *
  * @ORM\Table(name="tasks")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
  */
 class Task implements ITransformable
 {
@@ -35,7 +35,7 @@ class Task implements ITransformable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      */
     private $date;
 

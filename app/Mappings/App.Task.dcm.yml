@@ -11,7 +11,7 @@ App\Task:
     title:
       type: string
     date:
-      type: date
+      type: datetime
     createdAt:
       type: datetime
       column: created_at
