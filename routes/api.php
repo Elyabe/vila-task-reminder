@@ -31,6 +31,8 @@ Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
     Route::get('tasks/{id}', 'Api\TaskController@findById');
     Route::post('tasks', 'Api\TaskController@create');
     Route::delete('tasks/{id}', 'Api\TaskController@delete');
+
+    Route::post('tasks/import', 'Api\ImportTaskFromExcelController@import');
 });
 
 // Email Verification Routes...
