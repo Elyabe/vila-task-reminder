@@ -15,7 +15,14 @@ use Indaxia\OTR\Annotations\Policy;
 class UserController extends Controller
 {
 
-
+    /**
+     * @api {get} cursos Get all registered users.
+     * @apiName findAll
+     * @apiGroup User
+     *
+     * @apiSuccess {User[]} curso JSON array of users.
+     *
+     */
     public function findAll()
     {
         $policy = new Policy\Auto;

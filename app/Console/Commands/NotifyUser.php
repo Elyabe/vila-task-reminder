@@ -45,14 +45,10 @@ class NotifyUser extends Command
     public function handle()
     {
         $now = date('Y-m-d H:i:00.0000', strtotime(Carbon::now()->subHours(3)));
-        logger($now);
-        // echo var_dump($now);
         $date = new DateTime($now, new DateTimeZone('America/Sao_Paulo'));
 
         $date->add(new DateInterval('PT' . env('REMEMBER_BEFORE', 10) . 'M'));
 
-        echo var_dump($date);
-        // exit;
         $tasks = EntityManager::getRepository('App\Task')
             ->findByDate($date);
 

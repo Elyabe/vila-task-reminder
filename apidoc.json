@@ -1,0 +1,7 @@
+{
+    "name": "API-Villa-ReminderTasks",
+    "version": "0.1.0",
+    "description": "API for ReminderTasks users",
+    "sampleUrl": "http://localhost:8000/api/",
+    "url": "http://localhost:8000/api/"
+}

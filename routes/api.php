@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,9 @@ Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('ver
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 Route::post('reminders', 'ReminderTaskController@send')->name('verification.resend');
+
+// Documentation
+Route::get('documentation', function (Request $request) {
+    echo public_path();
+    return File::get(public_path() . "/doc/index.html");
+});
