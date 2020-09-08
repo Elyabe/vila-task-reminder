@@ -3,16 +3,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Doctrine\ORM\Mapping\Entity;
 use Exception;
-use Illuminate\Support\Facades\Auth;
-use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class JwtMiddleware extends BaseMiddleware
+class Jwt extends BaseMiddleware
 {
     /**
      * Handle an incoming request.
@@ -25,8 +22,6 @@ class JwtMiddleware extends BaseMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-
-            // $request = $this->addUserToRequest($request);
         } catch (Exception $e) {
             if ($e instanceof TokenInvalidException) {
                 return response()->json([
@@ -43,16 +38,5 @@ class JwtMiddleware extends BaseMiddleware
             }
         }
         return $next($request);
-    }
-
-    private function addUserToRequest($request)
-    {
-        $user = EntityManager::find('App\User', JWTAuth::getPayload()['id']);
-        $request->merge(['user' => $user]);
-        $request->setUserResolver(function () use ($user) {
-            return $user;
-        });
-        Auth::setUser($user);
-        return $request;
     }
 }

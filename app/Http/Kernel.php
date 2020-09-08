@@ -59,9 +59,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         // Add for API
-        'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
+        'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
+        'jwt.verify' => \App\Http\Middleware\Jwt::class,
     ];
 
     /**

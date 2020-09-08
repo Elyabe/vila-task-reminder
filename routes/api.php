@@ -14,15 +14,9 @@ use Illuminate\Support\Facades\File;
 |
 */
 
-
-// Auth routes
-Route::post('auth/register', 'Api\UserController@create');
-Route::post('auth/login', 'Api\AuthController@authenticate');
-
-// Task routes
 Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
     // Users routes
-    Route::get('users', 'Api\UserController@findAll')->middleware('jwt.auth');
+    Route::get('users', 'Api\UserController@findAll');
     Route::get('users/{id}', 'Api\UserController@findById');
     Route::post('users', 'Api\UserController@create');
     Route::delete('users/{id}', 'Api\UserController@delete');
@@ -32,19 +26,14 @@ Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
     Route::get('tasks/{id}', 'Api\TaskController@findById');
     Route::post('tasks', 'Api\TaskController@create');
     Route::delete('tasks/{id}', 'Api\TaskController@delete');
-
     Route::post('tasks/import', 'Api\ImportTaskFromExcelController@import');
 });
+
+// Auth routes
+Route::post('auth/register', 'Api\UserController@create');
+Route::post('auth/login', 'Api\AuthController@authenticate');
 
 // Email Verification Routes...
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
-
-Route::post('reminders', 'ReminderTaskController@send')->name('verification.resend');
-
-// Documentation
-Route::get('documentation', function (Request $request) {
-    echo public_path();
-    return File::get(public_path() . "/doc/index.html");
-});
