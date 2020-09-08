@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -12,9 +11,22 @@ use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Indaxia\OTR\Annotations\Policy;
 
-
+/**
+ * @group  Auth management
+ *
+ *  APIs for authenticate users
+ */
 class AuthController extends Controller
 {
+    /**
+     * Authenticate an user
+     *
+     * Authenticate a user
+     *
+     * @bodyParam email string required The email address of the user
+     * @bodyParam password string required The password of the user
+     *
+     */
     public function authenticate(Request $request)
     {
         $validator = Validator::make(

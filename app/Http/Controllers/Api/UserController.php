@@ -12,16 +12,19 @@ use Indaxia\OTR\Traits\Transformable;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Indaxia\OTR\Annotations\Policy;
 
+/**
+ * @authenticated
+ *
+ * @group  User management
+ * APIs for managing users
+ */
 class UserController extends Controller
 {
 
     /**
-     * @api {get} cursos Get all registered users.
-     * @apiName findAll
-     * @apiGroup User
+     * Get all users
      *
-     * @apiSuccess {User[]} curso JSON array of users.
-     *
+     * Get all registered users
      */
     public function findAll()
     {
@@ -36,6 +39,15 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
+
+    /**
+     * Get an user
+     *
+     * Get an user by id
+     *
+     * @urlParam id required The ID of the user
+     *
+     */
     public function findById(Request $request)
     {
         $policy = new Policy\Auto;
@@ -56,6 +68,18 @@ class UserController extends Controller
         return response()->json($parsedUser, 200);
     }
 
+
+    /**
+     * Create an user
+     *
+     * Register a new user
+     *
+     * @bodyParam email string required The email address of the user
+     * @bodyParam password string required The password of the user
+     * @bodyParam phoneNumber string required The phone number of the user
+     * @bodyParam cpf string required string The number of CPF document of the user
+     *
+     */
     public function create(Request $request)
     {
 
@@ -97,6 +121,14 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Destroy an user
+     *
+     * Destroy an user by id
+     *
+     * @urlParam id required The ID of the user
+     *
+     */
     public function delete(Request $request)
     {
         $user = EntityManager::find('App\User', $request->id);

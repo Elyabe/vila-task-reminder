@@ -7,15 +7,26 @@ use App\Task;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Indaxia\OTR\Annotations\Policy;
 use Indaxia\OTR\Traits\Transformable;
 use LaravelDoctrine\ORM\Facades\EntityManager;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
+
+/**
+ * @authenticated
+ *
+ * @group  Task management
+ *
+ * APIs for managing task
+ */
 class TaskController extends Controller
 {
+    /**
+     * Get all tasks
+     *
+     * Get all registered tasks
+     */
     public function findAll(Request $request)
     {
         $policy = new Policy\Auto;
@@ -30,6 +41,15 @@ class TaskController extends Controller
         return response()->json($tasks, 200);
     }
 
+
+    /**
+     * Get an task
+     *
+     * Get an task by id
+     *
+     * @urlParam id required The ID of the task
+     *
+     */
     public function findById(Request $request)
     {
         $policy = new Policy\Auto;
@@ -50,6 +70,16 @@ class TaskController extends Controller
         return response()->json($parsedTask, 200);
     }
 
+    /**
+     * Create an task
+     *
+     * Register a new task
+     *
+     * @bodyParam title string required Title for the task
+     * @bodyParam userId string required Task owner user ID
+     * @bodyParam date datetime required Occurrence date for the task
+     *
+     */
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -80,6 +110,14 @@ class TaskController extends Controller
         return response()->json($task->toArray(), 201);
     }
 
+    /**
+     * Destroy an task
+     *
+     * Destroy an task by id
+     *
+     * @urlParam id required The ID of the task
+     *
+     */
     public function delete(Request $request)
     {
         $task = EntityManager::find('App\Task', $request->id);

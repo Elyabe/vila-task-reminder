@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +38,8 @@ Route::post('auth/login', 'Api\AuthController@authenticate');
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+// Documentation
+Route::get('doc', function (Request $request) {
+    return View('apidoc.index');
+});
