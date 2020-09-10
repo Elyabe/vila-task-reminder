@@ -35,7 +35,7 @@ class ReminderTask extends Mailable
     {
         return $this->markdown('emails.reminder_task')
             ->subject($this->task->getTitle())
-            ->from('vilaapp@reminder.com', 'Villa reminder')
+            ->from(env('MAIL_ADDRESS_FROM'), env('MAIL_NAME_FROM'))
             ->with([
                 'user' => $this->user,
                 'task' => $this->task

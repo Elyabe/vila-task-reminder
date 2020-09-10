@@ -60,7 +60,8 @@
     "http://localhost:8000/api/auth/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"impedit","password":"atque"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/auth/login"
@@ -69,11 +70,12 @@
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "impedit",
-    "password": "atque"
+    "email": "culpa",
+    "password": "culpa"
 }
 
 fetch(url, {
@@ -123,7 +125,8 @@ Get all registered tasks</p>
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/api/tasks" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/tasks"
 );
@@ -131,6 +134,7 @@ Get all registered tasks</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -143,7 +147,7 @@ fetch(url, {
 <p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/tasks</code></p>
@@ -156,16 +160,18 @@ Get an task by id</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/api/tasks/temporibus" \
+    -G "http://localhost:8000/api/tasks/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/tasks/temporibus"
+    "http://localhost:8000/api/tasks/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -178,7 +184,7 @@ fetch(url, {
 <p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/tasks/{id}</code></p>
@@ -211,7 +217,8 @@ Register a new task</p>
     "http://localhost:8000/api/tasks" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"atque","userId":"sit","date":"est"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"title":"culpa","userId":"culpa","date":"culpa"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/tasks"
@@ -220,12 +227,13 @@ Register a new task</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "title": "atque",
-    "userId": "sit",
-    "date": "est"
+    "title": "culpa",
+    "userId": "culpa",
+    "date": "culpa"
 }
 
 fetch(url, {
@@ -277,16 +285,18 @@ Destroy an task by id</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost:8000/api/tasks/asperiores" \
+    "http://localhost:8000/api/tasks/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/tasks/asperiores"
+    "http://localhost:8000/api/tasks/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -327,7 +337,8 @@ Get all registered users</p>
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/api/users" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/users"
 );
@@ -335,6 +346,7 @@ Get all registered users</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -347,7 +359,7 @@ fetch(url, {
 <p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users</code></p>
@@ -360,16 +372,18 @@ Get an user by id</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
-    -G "http://localhost:8000/api/users/esse" \
+    -G "http://localhost:8000/api/users/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/esse"
+    "http://localhost:8000/api/users/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -382,7 +396,7 @@ fetch(url, {
 <p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users/{id}</code></p>
@@ -415,7 +429,8 @@ Register a new user</p>
     "http://localhost:8000/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"aut","password":"error","phoneNumber":"autem","cpf":"beatae"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/users"
@@ -424,13 +439,15 @@ Register a new user</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "aut",
-    "password": "error",
-    "phoneNumber": "autem",
-    "cpf": "beatae"
+    "email": "culpa",
+    "password": "culpa",
+    "confirmPassword": "culpa",
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
 }
 
 fetch(url, {
@@ -466,6 +483,12 @@ fetch(url, {
 <td>The password of the user</td>
 </tr>
 <tr>
+<td><code>confirmPassword</code></td>
+<td>string</td>
+<td>required</td>
+<td>The password confirmation of the user</td>
+</tr>
+<tr>
 <td><code>phoneNumber</code></td>
 <td>string</td>
 <td>required</td>
@@ -488,16 +511,18 @@ Destroy an user by id</p>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X DELETE \
-    "http://localhost:8000/api/users/ad" \
+    "http://localhost:8000/api/users/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users/ad"
+    "http://localhost:8000/api/users/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -537,7 +562,8 @@ Register a new user</p>
     "http://localhost:8000/api/auth/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quisquam","password":"sit","phoneNumber":"dolorem","cpf":"rem"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/auth/register"
@@ -546,13 +572,15 @@ Register a new user</p>
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "quisquam",
-    "password": "sit",
-    "phoneNumber": "dolorem",
-    "cpf": "rem"
+    "email": "culpa",
+    "password": "culpa",
+    "confirmPassword": "culpa",
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
 }
 
 fetch(url, {
@@ -588,6 +616,12 @@ fetch(url, {
 <td>The password of the user</td>
 </tr>
 <tr>
+<td><code>confirmPassword</code></td>
+<td>string</td>
+<td>required</td>
+<td>The password confirmation of the user</td>
+</tr>
+<tr>
 <td><code>phoneNumber</code></td>
 <td>string</td>
 <td>required</td>
@@ -611,7 +645,8 @@ fetch(url, {
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/doc.json" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/doc.json"
 );
@@ -619,6 +654,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -634,7 +670,7 @@ fetch(url, {
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "dabf9406-3958-4aae-9e63-69adcc16126c",
+        "_postman_id": "8be30d1d-8bd8-4f89-a837-eff39a5b5da0",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -665,7 +701,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"quis\",\n    \"password\": \"enim\"\n}"
+                            "raw": "{\n    \"email\": \"impedit\",\n    \"password\": \"atque\"\n}"
                         },
                         "description": "Authenticate a user",
                         "response": []
@@ -717,7 +753,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sit",
+                                    "value": "temporibus",
                                     "description": "The ID of the task"
                                 }
                             ]
@@ -763,7 +799,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"a\",\n    \"userId\": \"in\",\n    \"date\": \"quam\"\n}"
+                            "raw": "{\n    \"title\": \"atque\",\n    \"userId\": \"sit\",\n    \"date\": \"est\"\n}"
                         },
                         "description": "Register a new task",
                         "response": []
@@ -781,7 +817,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "asperiores",
                                     "description": "The ID of the task"
                                 }
                             ]
@@ -851,7 +887,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "expedita",
+                                    "value": "esse",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -897,7 +933,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"magnam\",\n    \"password\": \"nulla\",\n    \"phoneNumber\": \"neque\",\n    \"cpf\": \"ipsa\"\n}"
+                            "raw": "{\n    \"email\": \"aut\",\n    \"password\": \"error\",\n    \"phoneNumber\": \"autem\",\n    \"cpf\": \"beatae\"\n}"
                         },
                         "description": "Register a new user",
                         "response": []
@@ -915,7 +951,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consequatur",
+                                    "value": "ad",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -961,7 +997,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"et\",\n    \"password\": \"voluptate\",\n    \"phoneNumber\": \"praesentium\",\n    \"cpf\": \"molestias\"\n}"
+                            "raw": "{\n    \"email\": \"quisquam\",\n    \"password\": \"sit\",\n    \"phoneNumber\": \"dolorem\",\n    \"cpf\": \"rem\"\n}"
                         },
                         "description": "Register a new user",
                         "response": []
@@ -1128,7 +1164,8 @@ fetch(url, {
 <pre><code class="language-bash">curl -X POST \
     "http://localhost:8000/api/tasks/import" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/tasks/import"
 );
@@ -1136,6 +1173,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1155,7 +1193,8 @@ fetch(url, {
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/api/email/verify" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/email/verify"
 );
@@ -1163,6 +1202,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1188,7 +1228,8 @@ fetch(url, {
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/api/email/verify/1" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/email/verify/1"
 );
@@ -1196,6 +1237,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1205,10 +1247,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (403):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "message": "Invalid signature."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/email/verify/{id}</code></p>
@@ -1221,7 +1263,8 @@ fetch(url, {
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost:8000/api/email/resend" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/email/resend"
 );
@@ -1229,6 +1272,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {

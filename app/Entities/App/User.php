@@ -295,46 +295,91 @@ class User implements
         return $this->updatedAt;
     }
 
+    /**
+     * Get updatedAt.
+     *
+     * @return array
+     */
     public function getJWTCustomClaims()
     {
         return [];
     }
 
+    /**
+     * Get JWT identifier.
+     *
+     * @return string|null
+     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
+    /**
+     * Get Key
+     *
+     * @return string|null
+     */
     public function getKey()
     {
         return $this->id;
     }
 
+    /**
+     * Get Auth identifier.
+     *
+     * @return string|null
+     */
     public function getAuthIdentifier()
     {
         return $this->getId();
     }
 
+    /**
+     * Get name of the unique identifier of user field
+     *
+     * @return string
+     */
     public function getAuthIdentifierName()
     {
         return 'id';
     }
 
+    /**
+     * Get password of user
+     *
+     * @return string|null
+     */
     public function getAuthPassword()
     {
         $this->getPassword();
     }
 
+    /**
+     * Get name of field for remember token name
+     *
+     * @return string
+     */
     public function getRememberTokenName()
     {
         return 'remember_token';
     }
 
+    /**
+     * Send notification - veifications e-mail
+     *
+     * @return void
+     */
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail);
     }
 
+    /**
+     * Check if user has a verified mail
+     *
+     * @return boolean
+     */
     public function hasVerifiedEmail()
     {
         return !is_null($this->emailVerifiedAt);

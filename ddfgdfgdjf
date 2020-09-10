@@ -1,0 +1,95 @@
+[33mcommit ba1c448bfef53abda5db78a407c0378061022202[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Tue Sep 8 15:52:49 2020 -0300
+
+    Basic documentation generated
+
+[33mcommit be41c7d38591bd00071b283407de51105dd75dd3[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Tue Sep 8 14:29:55 2020 -0300
+
+    Add middleware e-mail verified
+
+[33mcommit ebf45fbf3fa0acee0302703a81b8e8c78ffdef70[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Mon Sep 7 14:09:35 2020 -0300
+
+    Add base for generate documentation
+
+[33mcommit cfdf96f5f74532a538957adfdcac068e00a81d2b[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Mon Sep 7 12:11:45 2020 -0300
+
+    Handle Upload file import
+
+[33mcommit 938f710bc63370b7b1122e23c4e2ea380c877bc9[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Mon Sep 7 10:36:02 2020 -0300
+
+    Basic Import from Excel
+
+[33mcommit e23b0e19f7bad155b6891ff2c97c6fd2431fec63[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Mon Sep 7 08:54:48 2020 -0300
+
+    Basic Reminder - Add Job, command, notification
+
+[33mcommit f50f2c7c4fa30acc9ad25998e987468343b551e9[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Sun Sep 6 15:30:45 2020 -0300
+
+    Resend mail verification
+
+[33mcommit e751dc35c35ef85fb0b7e3c5f9c6f9f042e7414b[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Sun Sep 6 13:45:48 2020 -0300
+
+    Email verification: basic version
+
+[33mcommit af2d2eb43b9ffbd594a728ed952ede02e9dc12f0[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Sun Sep 6 11:25:18 2020 -0300
+
+    Add Custom Exception Handler
+
+[33mcommit f5f27590ac1fd713119978c8f0dbf426c6740419[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Sat Sep 5 23:08:39 2020 -0300
+
+    Add JWT basic auth
+
+[33mcommit 4e581bffa17fe815b722fe328f6d27a7b0b01670[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 15:51:36 2020 -0300
+
+    Add basic methods controller
+
+[33mcommit e1ba076507ad44c9931649b82927e8c1f1048eaa[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 15:14:43 2020 -0300
+
+    Add Api Controllers
+
+[33mcommit c4a7a5a0b2ac4ff6d08dc0014b3561eb4f2541ff[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 14:51:39 2020 -0300
+
+    Fix Entities fields
+
+[33mcommit e15dcf6428128c7c13bb754e8c12a12bbb6e214c[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 12:09:39 2020 -0300
+
+    Generate Entities Task, User
+
+[33mcommit a490859579fa09aa0bea4ee242f8374d8e38fd43[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 11:50:11 2020 -0300
+
+    Add Doctrine + extensions
+
+[33mcommit dcc0569b5900e631baa8b78b616441395da0dc96[m
+Author: elyabe <elyabe.as@gmail.com>
+Date:   Thu Sep 3 11:06:31 2020 -0300
+
+    Basic app structure

@@ -76,16 +76,22 @@ class UserController extends Controller
      *
      * @bodyParam email string required The email address of the user
      * @bodyParam password string required The password of the user
+     * @bodyParam confirmPassword string required The password confirmation of the user
      * @bodyParam phoneNumber string required The phone number of the user
      * @bodyParam cpf string required string The number of CPF document of the user
      *
      */
     public function create(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|unique:App\User,email',
+            'password' => 'required|string',
+            'confirmPassword' => 'required|string|same:password',
+        ]);
 
-        if ($this->validator($request->all())->fails()) {
+        if ($validator->fails()) {
             return response()->json([
-                'error' => $this->validator($request->all())->errors()
+                'error' => $validator->errors()
             ], 400);
         }
 
@@ -112,14 +118,6 @@ class UserController extends Controller
         return response()->json($user->toArray($policy), 201);
     }
 
-
-    public function validator($params)
-    {
-        return  $validator = Validator::make($params, [
-            'email' => 'required|string|unique:App\User,email',
-            'password' => 'required|string'
-        ]);
-    }
 
     /**
      * Destroy an user

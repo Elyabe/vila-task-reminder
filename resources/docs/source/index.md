@@ -36,7 +36,8 @@ curl -X POST \
     "http://localhost:8000/api/auth/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"impedit","password":"atque"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa"}'
 
 ```
 
@@ -48,11 +49,12 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "impedit",
-    "password": "atque"
+    "email": "culpa",
+    "password": "culpa"
 }
 
 fetch(url, {
@@ -93,7 +95,8 @@ Get all registered tasks
 curl -X GET \
     -G "http://localhost:8000/api/tasks" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -104,6 +107,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -119,7 +123,7 @@ fetch(url, {
 
 ```json
 {
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }
 ```
 
@@ -139,19 +143,21 @@ Get an task by id
 
 ```bash
 curl -X GET \
-    -G "http://localhost:8000/api/tasks/temporibus" \
+    -G "http://localhost:8000/api/tasks/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost:8000/api/tasks/temporibus"
+    "http://localhost:8000/api/tasks/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -167,7 +173,7 @@ fetch(url, {
 
 ```json
 {
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }
 ```
 
@@ -195,7 +201,8 @@ curl -X POST \
     "http://localhost:8000/api/tasks" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"title":"atque","userId":"sit","date":"est"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"title":"culpa","userId":"culpa","date":"culpa"}'
 
 ```
 
@@ -207,12 +214,13 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "title": "atque",
-    "userId": "sit",
-    "date": "est"
+    "title": "culpa",
+    "userId": "culpa",
+    "date": "culpa"
 }
 
 fetch(url, {
@@ -248,19 +256,21 @@ Destroy an task by id
 
 ```bash
 curl -X DELETE \
-    "http://localhost:8000/api/tasks/asperiores" \
+    "http://localhost:8000/api/tasks/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost:8000/api/tasks/asperiores"
+    "http://localhost:8000/api/tasks/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -299,7 +309,8 @@ Get all registered users
 curl -X GET \
     -G "http://localhost:8000/api/users" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -310,6 +321,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -325,7 +337,7 @@ fetch(url, {
 
 ```json
 {
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }
 ```
 
@@ -345,19 +357,21 @@ Get an user by id
 
 ```bash
 curl -X GET \
-    -G "http://localhost:8000/api/users/esse" \
+    -G "http://localhost:8000/api/users/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost:8000/api/users/esse"
+    "http://localhost:8000/api/users/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -373,7 +387,7 @@ fetch(url, {
 
 ```json
 {
-    "error": "Authorization Token not Found."
+    "error": "Token is invalid."
 }
 ```
 
@@ -401,7 +415,8 @@ curl -X POST \
     "http://localhost:8000/api/users" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"aut","password":"error","phoneNumber":"autem","cpf":"beatae"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
 
 ```
 
@@ -413,13 +428,15 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "aut",
-    "password": "error",
-    "phoneNumber": "autem",
-    "cpf": "beatae"
+    "email": "culpa",
+    "password": "culpa",
+    "confirmPassword": "culpa",
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
 }
 
 fetch(url, {
@@ -441,6 +458,7 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `email` | string |  required  | The email address of the user
         `password` | string |  required  | The password of the user
+        `confirmPassword` | string |  required  | The password confirmation of the user
         `phoneNumber` | string |  required  | The phone number of the user
         `cpf` | string |  required  | string The number of CPF document of the user
     
@@ -456,19 +474,21 @@ Destroy an user by id
 
 ```bash
 curl -X DELETE \
-    "http://localhost:8000/api/users/ad" \
+    "http://localhost:8000/api/users/culpa" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost:8000/api/users/ad"
+    "http://localhost:8000/api/users/culpa"
 );
 
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -505,7 +525,8 @@ curl -X POST \
     "http://localhost:8000/api/auth/register" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
-    -d '{"email":"quisquam","password":"sit","phoneNumber":"dolorem","cpf":"rem"}'
+    -H "Authorization: Bearer {token}" \
+    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
 
 ```
 
@@ -517,13 +538,15 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 let body = {
-    "email": "quisquam",
-    "password": "sit",
-    "phoneNumber": "dolorem",
-    "cpf": "rem"
+    "email": "culpa",
+    "password": "culpa",
+    "confirmPassword": "culpa",
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
 }
 
 fetch(url, {
@@ -545,6 +568,7 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `email` | string |  required  | The email address of the user
         `password` | string |  required  | The password of the user
+        `confirmPassword` | string |  required  | The password confirmation of the user
         `phoneNumber` | string |  required  | The phone number of the user
         `cpf` | string |  required  | string The number of CPF document of the user
     
@@ -561,7 +585,8 @@ Parameter | Type | Status | Description
 curl -X GET \
     -G "http://localhost:8000/doc.json" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -572,6 +597,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -590,7 +616,7 @@ fetch(url, {
     "variables": [],
     "info": {
         "name": "Laravel API",
-        "_postman_id": "dabf9406-3958-4aae-9e63-69adcc16126c",
+        "_postman_id": "8be30d1d-8bd8-4f89-a837-eff39a5b5da0",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -621,7 +647,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"quis\",\n    \"password\": \"enim\"\n}"
+                            "raw": "{\n    \"email\": \"impedit\",\n    \"password\": \"atque\"\n}"
                         },
                         "description": "Authenticate a user",
                         "response": []
@@ -673,7 +699,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "sit",
+                                    "value": "temporibus",
                                     "description": "The ID of the task"
                                 }
                             ]
@@ -719,7 +745,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"a\",\n    \"userId\": \"in\",\n    \"date\": \"quam\"\n}"
+                            "raw": "{\n    \"title\": \"atque\",\n    \"userId\": \"sit\",\n    \"date\": \"est\"\n}"
                         },
                         "description": "Register a new task",
                         "response": []
@@ -737,7 +763,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "et",
+                                    "value": "asperiores",
                                     "description": "The ID of the task"
                                 }
                             ]
@@ -807,7 +833,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "expedita",
+                                    "value": "esse",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -853,7 +879,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"magnam\",\n    \"password\": \"nulla\",\n    \"phoneNumber\": \"neque\",\n    \"cpf\": \"ipsa\"\n}"
+                            "raw": "{\n    \"email\": \"aut\",\n    \"password\": \"error\",\n    \"phoneNumber\": \"autem\",\n    \"cpf\": \"beatae\"\n}"
                         },
                         "description": "Register a new user",
                         "response": []
@@ -871,7 +897,7 @@ fetch(url, {
                                 {
                                     "id": "id",
                                     "key": "id",
-                                    "value": "consequatur",
+                                    "value": "ad",
                                     "description": "The ID of the user"
                                 }
                             ]
@@ -917,7 +943,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"et\",\n    \"password\": \"voluptate\",\n    \"phoneNumber\": \"praesentium\",\n    \"cpf\": \"molestias\"\n}"
+                            "raw": "{\n    \"email\": \"quisquam\",\n    \"password\": \"sit\",\n    \"phoneNumber\": \"dolorem\",\n    \"cpf\": \"rem\"\n}"
                         },
                         "description": "Register a new user",
                         "response": []
@@ -1089,7 +1115,8 @@ fetch(url, {
 curl -X POST \
     "http://localhost:8000/api/tasks/import" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -1100,6 +1127,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1127,7 +1155,8 @@ fetch(url, {
 curl -X GET \
     -G "http://localhost:8000/api/email/verify" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -1138,6 +1167,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1171,7 +1201,8 @@ fetch(url, {
 curl -X GET \
     -G "http://localhost:8000/api/email/verify/1" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -1182,6 +1213,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {
@@ -1193,11 +1225,11 @@ fetch(url, {
 ```
 
 
-> Example response (429):
+> Example response (403):
 
 ```json
 {
-    "message": "Too Many Attempts."
+    "message": "Invalid signature."
 }
 ```
 
@@ -1215,7 +1247,8 @@ fetch(url, {
 curl -X GET \
     -G "http://localhost:8000/api/email/resend" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {token}"
 ```
 
 ```javascript
@@ -1226,6 +1259,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {token}",
 };
 
 fetch(url, {

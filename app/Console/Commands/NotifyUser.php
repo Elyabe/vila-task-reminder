@@ -47,7 +47,7 @@ class NotifyUser extends Command
         $now = date('Y-m-d H:i:00.0000', strtotime(Carbon::now()->subHours(3)));
         $date = new DateTime($now, new DateTimeZone('America/Sao_Paulo'));
 
-        $date->add(new DateInterval('PT' . env('REMEMBER_BEFORE', 10) . 'M'));
+        $date->add(new DateInterval('PT' . env('REMINDER_BEFORE', 10) . 'M'));
 
         $tasks = EntityManager::getRepository('App\Task')
             ->findByDate($date);
