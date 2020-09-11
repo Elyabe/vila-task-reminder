@@ -50,22 +50,35 @@ class UserController extends Controller
      */
     public function findById(Request $request)
     {
+        $validator = Validator::make(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'id' => 'uuid|exists:App\User,id',
+            ],
+            [
+                'exists' => 'User not found',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
+        $task = EntityManager::getRepository('App\User')->find($request->id);
+
         $policy = new Policy\Auto;
         $policy->inside([
             'user' => new Policy\To\Skip(),
         ]);
 
-        $task =  EntityManager::getRepository('App\User')->find($request->id);
-
-        if (is_null($task)) {
-            return response()->json([
-                'error' => 'User not found',
-            ], 400);
-        }
-
-        $parsedUser = $task->toArray($policy);
-
-        return response()->json($parsedUser, 200);
+        return response()->json(
+            $task->toArray($policy),
+            200
+        );
     }
 
 
@@ -83,11 +96,20 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|unique:App\User,email',
-            'password' => 'required|string',
-            'confirmPassword' => 'required|string|same:password',
-        ]);
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email|unique:App\User,email',
+                'password' => 'required|string|min:6|max:25',
+                'confirmPassword' => 'required|string|same:password',
+                'cpf' => 'required|cpf|unique:App\User,cpf',
+                'phoneNumber' => 'required|celular_com_ddd'
+            ],
+            [
+                'celular_com_ddd' => 'The :attribute must be valid.',
+                'cpf' => 'The :attribute must be a valid number.'
+            ]
+        );
 
         if ($validator->fails()) {
             return response()->json([
@@ -115,7 +137,10 @@ class UserController extends Controller
             'password' => new Policy\To\Skip
         ]);
 
-        return response()->json($user->toArray($policy), 201);
+        return response()->json(
+            $user->toArray($policy),
+            201
+        );
     }
 
 
@@ -129,17 +154,28 @@ class UserController extends Controller
      */
     public function delete(Request $request)
     {
-        $user = EntityManager::find('App\User', $request->id);
+        $validator = Validator::make(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'id' => 'exists:App\User,id',
+            ],
+            [
+                'exists' => 'User not found',
+            ]
+        );
 
-        if (is_null($user)) {
+        if ($validator->fails()) {
             return response()->json([
-                'error' => 'User not found',
+                'error' => $validator->errors(),
             ], 400);
         }
 
+        $user = EntityManager::find('App\User', $request->id);
         EntityManager::remove($user);
         EntityManager::flush();
 
-        return response(['statusCode' => 204]);
+        return response('', $status = 204);
     }
 }
