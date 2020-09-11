@@ -17,6 +17,7 @@
         "laravel-doctrine/orm": "1.5.*",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "laravellegends/pt-br-validator": "6.*",
         "mpociot/laravel-apidoc-generator": "^4.8",
         "rap2hpoutre/fast-excel": "^2.0",
         "symfony/yaml": "^5.1",

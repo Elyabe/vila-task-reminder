@@ -52,22 +52,35 @@ class TaskController extends Controller
      */
     public function findById(Request $request)
     {
+        $validator = Validator::make(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'id' => 'uuid|exists:App\Task,id',
+            ],
+            [
+                'exists' => 'Task not found',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors(),
+            ], 400);
+        }
+
         $policy = new Policy\Auto;
         $policy->inside([
             'user' => new Policy\To\Skip(),
         ]);
 
-        $task =  EntityManager::getRepository('App\Task')->find($request->id);
+        $task = EntityManager::getRepository('App\Task')->find($request->id);
 
-        if (is_null($task)) {
-            return response()->json([
-                'error' => 'Task not found',
-            ], 400);
-        }
-
-        $parsedTask = $task->toArray($policy);
-
-        return response()->json($parsedTask, 200);
+        return response()->json(
+            $task->toArray($policy),
+            200
+        );
     }
 
     /**
@@ -120,17 +133,29 @@ class TaskController extends Controller
      */
     public function delete(Request $request)
     {
-        $task = EntityManager::find('App\Task', $request->id);
+        $validator = Validator::make(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'id' => 'uuid|exists:App\Task,id',
+            ],
+            [
+                'exists' => 'Task not found',
+            ]
+        );
 
-        if (is_null($task)) {
+        if ($validator->fails()) {
             return response()->json([
-                'error' => 'Task not found',
+                'error' => $validator->errors(),
             ], 400);
         }
+
+        $task = EntityManager::find('App\Task', $request->id);
 
         EntityManager::remove($task);
         EntityManager::flush();
 
-        return response(['statusCode' => 204]);
+        return response('', $status = 204);
     }
 }
