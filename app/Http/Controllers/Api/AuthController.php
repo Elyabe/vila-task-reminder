@@ -26,6 +26,14 @@ class AuthController extends Controller
      * @bodyParam email string required The email address of the user
      * @bodyParam password string required The password of the user
      *
+     * @response  400 {
+     *  "error": {
+     *      "field": [
+     *           "Error Message 1",
+     *                  ...
+     *      ]
+     *  }
+     * }
      */
     public function authenticate(Request $request)
     {
@@ -75,5 +83,63 @@ class AuthController extends Controller
             'expiresIn'  => env('JWT_TTL', 60),
             'user'       => $user->toArray($policyHide),
         ]);
+    }
+
+    /**
+     * @authenticated
+     *
+     * Change password of the user
+     *
+     * Update password of user by id
+     *
+     * @urlParam id required The ID of the user
+     *
+     * @bodyParam password string required The actual password of the user
+     * @bodyParam newPassword string required The new password
+     * @bodyParam newPasswordConfirm string required The new password confirmation
+     */
+    public function passwordChange(Request $request)
+    {
+
+        $params = $request->only('password', 'newPassword', 'newPasswordConfirm');
+
+        $validatorUpdate = Validator::make(
+            $params,
+            [
+                'password' => 'required|string|min:6|max:25',
+                'newPassword' => 'required|string|min:6|max:25',
+                'newPasswordConfirm' => 'required|string|same:newPassword',
+            ],
+        );
+
+        if ($validatorUpdate->fails()) {
+            return response()->json([
+                'error' => $validatorUpdate->errors(),
+            ], 400);
+        }
+
+        $user = EntityManager::find('App\User', $request->user('api')->getId());
+
+        if (!Hash::check($request->password, $user->getPassword())) {
+            throw new ApiException("Bad Credentials.", 401);
+        }
+
+        $user->setPassword(Hash::make($request->password));
+
+        EntityManager::merge($user);
+        EntityManager::flush();
+
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'password' => new Policy\To\Skip(),
+            'rememberToken' => new Policy\To\Skip(),
+        ]);
+
+        return response()->json(
+            [
+                'message' => 'Password changed.',
+            ],
+            200
+        );
     }
 }

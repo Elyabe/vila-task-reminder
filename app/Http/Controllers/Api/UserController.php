@@ -30,7 +30,8 @@ class UserController extends Controller
     {
         $policy = new Policy\Auto;
         $policy->inside([
-            'password' => new Policy\To\Skip
+            'password' => new Policy\To\Skip,
+            'rememberToken' => new Policy\To\Skip,
         ]);
 
         $users = EntityManager::getRepository('App\User')->findAll();
@@ -45,7 +46,7 @@ class UserController extends Controller
      *
      * Get an user by id
      *
-     * @urlParam id required The ID of the user
+     * @urlParam id required The ID of the user Example: 2e55ba0a-f524-11ea-8572-5cc9d37d7d78
      *
      */
     public function findById(Request $request)
@@ -58,7 +59,7 @@ class UserController extends Controller
                 'id' => 'uuid|exists:App\User,id',
             ],
             [
-                'exists' => 'User not found',
+                'exists' => 'User not found.',
             ]
         );
 
@@ -68,7 +69,7 @@ class UserController extends Controller
             ], 400);
         }
 
-        $task = EntityManager::getRepository('App\User')->find($request->id);
+        $users = EntityManager::getRepository('App\User')->find($request->id);
 
         $policy = new Policy\Auto;
         $policy->inside([
@@ -76,7 +77,7 @@ class UserController extends Controller
         ]);
 
         return response()->json(
-            $task->toArray($policy),
+            $users->toArray($policy),
             200
         );
     }
@@ -85,7 +86,7 @@ class UserController extends Controller
     /**
      * Create an user
      *
-     * Register a new user
+     * Create an user and returns a JSON containing the new user's information including ID
      *
      * @bodyParam email string required The email address of the user
      * @bodyParam password string required The password of the user
@@ -134,7 +135,8 @@ class UserController extends Controller
 
         $policy = new Policy\Auto;
         $policy->inside([
-            'password' => new Policy\To\Skip
+            'password' => new Policy\To\Skip,
+            'rememberToken' => new Policy\To\Skip,
         ]);
 
         return response()->json(
@@ -143,6 +145,91 @@ class UserController extends Controller
         );
     }
 
+
+    /**
+     * Update an user
+     *
+     * Update an user by id and return a JSON containing updated user information
+     *
+     * @urlParam id required The ID of the user Example: 2e55ba0a-f524-11ea-8572-5cc9d37d7d78
+     *
+     * @bodyParam email string required The email address of the user Example: joao@gmail.com
+     * @bodyParam phoneNumber string required The phone number of the user Example: (27) 99726-0000
+     * @bodyParam cpf string required the number of CPF document of the user Example: 153.564.153-71
+     */
+    public function update(Request $request)
+    {
+        $validatorId = Validator::make(
+            [
+                'id' => $request->id,
+            ],
+            [
+                'id' => 'uuid|exists:App\User,id',
+            ],
+            [
+                'exists' => 'User not found.',
+            ]
+        );
+
+        if ($validatorId->fails()) {
+            return response()->json([
+                'error' => $validatorId->errors(),
+            ], 400);
+        }
+
+
+        $params = $request->only('email', 'cpf', 'phoneNumber');
+
+        $validatorUpdate = Validator::make(
+            $params,
+            [
+                'email' => 'email|unique:App\User,email',
+                'cpf' => 'formato_cpf|cpf|unique:App\User,cpf',
+                'phoneNumber' => 'celular_com_ddd',
+            ],
+            [
+                'celular_com_ddd' => 'The :attribute does not match the format (XX) XXXXX-XXXX.',
+                'cpf' => 'The :attribute must be a valid number.',
+                'formato_cpf' => 'The :attribute does not match the format XXX.XXX.XXX-XX.',
+            ]
+        );
+
+        if ($validatorUpdate->fails()) {
+            return response()->json([
+                'error' => $validatorUpdate->errors(),
+            ], 400);
+        }
+
+        $user = EntityManager::find('App\User', $request->id);
+
+        if (array_key_exists('email', $params)) {
+            $user->setEmail($params['email']);
+        }
+
+        if (array_key_exists('phoneNumber', $params)) {
+            $user->setPhoneNumber($params['phoneNumber']);
+        }
+
+        if (array_key_exists('cpf', $params)) {
+            $user->setCpf($params['cpf']);
+        }
+
+
+
+        EntityManager::merge($user);
+        EntityManager::flush();
+
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'password' => new Policy\To\Skip(),
+            'rememberToken' => new Policy\To\Skip(),
+        ]);
+
+        return response()->json(
+            $user->toArray($policy),
+            200
+        );
+    }
 
     /**
      * Destroy an user
@@ -159,10 +246,10 @@ class UserController extends Controller
                 'id' => $request->id,
             ],
             [
-                'id' => 'exists:App\User,id',
+                'id' => 'uuid|exists:App\User,id',
             ],
             [
-                'exists' => 'User not found',
+                'exists' => 'User not found.',
             ]
         );
 

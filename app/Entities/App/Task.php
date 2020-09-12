@@ -10,7 +10,7 @@ use Indaxia\OTR\Traits\Transformable;
  * Task
  *
  * @ORM\Table(name="tasks")
- * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
+ * @ORM\Entity
  */
 class Task implements ITransformable
 {
@@ -52,6 +52,20 @@ class Task implements ITransformable
      * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="done", type="boolean")
+     */
+    private $done = false;
 
     /**
      * @var \App\User
@@ -168,6 +182,54 @@ class Task implements ITransformable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     *
+     * @return Task
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set done.
+     *
+     * @param bool $done
+     *
+     * @return Task
+     */
+    public function setDone($done)
+    {
+        $this->done = $done;
+
+        return $this;
+    }
+
+    /**
+     * Get done.
+     *
+     * @return bool
+     */
+    public function getDone()
+    {
+        return $this->done;
     }
 
     /**

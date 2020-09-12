@@ -17,14 +17,6 @@ class ImportTaskFromExcelController extends Controller
 {
     public function import(Request $request)
     {
-        /**
-         * @group  Task management
-         *
-         * Import tasks from .xlsx file
-         *
-         * @bodyParam file *.xlsx required Excel file containing the tasks
-         *
-         */
         $requestValidator = Validator::make($request->all(), [
             'file' => 'required|mimes:xlsx',
         ]);

@@ -20,18 +20,21 @@ Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
     Route::get('users', 'Api\UserController@findAll');
     Route::get('users/{id}', 'Api\UserController@findById');
     Route::post('users', 'Api\UserController@create');
+    Route::put('users/{id}', 'Api\UserController@update');
     Route::delete('users/{id}', 'Api\UserController@delete');
 
     //Task
     Route::get('tasks', 'Api\TaskController@findAll');
     Route::get('tasks/{id}', 'Api\TaskController@findById');
     Route::post('tasks', 'Api\TaskController@create');
+    Route::put('tasks/{id}', 'Api\TaskController@update');
     Route::delete('tasks/{id}', 'Api\TaskController@delete');
-    Route::post('tasks/import', 'Api\ImportTaskFromExcelController@import');
+    Route::post('tasks/import', 'Api\TaskController@import');
+
+    Route::put('auth/password-change', 'Api\AuthController@passwordChange');
 });
 
 // Auth routes
-Route::post('auth/register', 'Api\UserController@create');
 Route::post('auth/login', 'Api\AuthController@authenticate');
 
 // Email Verification Routes...
