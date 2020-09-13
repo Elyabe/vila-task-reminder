@@ -55,6 +55,7 @@ class NotifyUser extends Command
         foreach ($tasks as $task) {
             echo $task->getTitle();
             echo var_dump($task->getDate());
+            echo var_dump($task->getUser());
             dispatch(new SendReminderJob(
                 $task->getUser()->getEmail(),
                 new ReminderTask($task->getUser(), $task)
