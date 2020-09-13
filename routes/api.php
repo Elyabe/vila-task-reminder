@@ -19,7 +19,6 @@ Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
     // Users routes
     Route::get('users', 'Api\UserController@findAll');
     Route::get('users/{id}', 'Api\UserController@findById');
-    Route::post('users', 'Api\UserController@create');
     Route::put('users/{id}', 'Api\UserController@update');
     Route::delete('users/{id}', 'Api\UserController@delete');
 
@@ -33,6 +32,9 @@ Route::group(['middleware' => ['jwt.verify', 'verified']], function () {
 
     Route::put('auth/password-change', 'Api\AuthController@passwordChange');
 });
+
+// Register
+Route::post('users', 'Api\UserController@create');
 
 // Auth routes
 Route::post('auth/login', 'Api\AuthController@authenticate');
