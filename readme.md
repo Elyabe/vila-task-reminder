@@ -75,7 +75,18 @@ Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restri
     Execute as migrations:
     <pre> php artisan doctrine:migrations:migrate</pre>
 
-    Pronto. A API estará disponível, por padrão, no endereço da [ máquina local na porta 8000](http://localhost:8000).
+6. Gere as chaves necessárias   
+    - Gerando a chave JWT
+        <pre>php artisan jwt:secret<pre>
+    - Gerando a chave de aplicação:
+        <pre>php artisan key:generate<pre>
+7. Finalize limpando as configurações em *cache* usando    
+        <pre>php artisan config:clear<pre>
+8. **(Opcional)** Pode ser necessário conceder permissões de escrita à pasta <code>storage</code>.
+    Para conceder permissão total, use:
+        <pre>chmod 777 -R storage</pre>
+
+Pronto. A API estará disponível, por padrão, no endereço da [ máquina local na porta 8000](http://localhost:8000).
 
 
 ## :dark_sunglasses: Demonstração da aplicação
