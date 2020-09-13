@@ -53,32 +53,29 @@ Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restri
 1. Clone este projeto;
     <pre> git clone [url] </pre>
 2. Instale as dependências utilizando o Composer, executando o seguinte comando na raíz do projeto
-<pre> composer install </pre>
+    <pre> composer install </pre>
 
 3. Configure as variáveis de ambiente execute o seguinte comando também na raíz do projeto
-<pre> cp .env.example .env </pre> 
+    <pre> cp .env.example .env </pre> 
 
-Modifique as variáveis caso necessário.
+4. Lance o container com o comando:
+    <pre>docker-compose up --build -d</pre>
 
-4. Lance o container com o comando
+    A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada utilizando o <i> docker-compose</i> em três contêineres:
 
-A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada utilizando o <i> docker-compose</i> em três contêineres:
+    - **vila-task-reminder**: Conteiner da servidor Apache2 + PHP7
+    - **vila-task-reminder-mysql**: Conteiner suporte da base de dados da aplicação
+    - **vila-task-reminder-scheduler**: Responsável pelo notificador/lembrete de tarefas de forma antecipada.
 
-- **vila-task-reminder**: Conteiner da servidor Apache2 + PHP7
-- **vila-task-reminder-mysql**: Conteiner suporte da base de dados da aplicação
-- **vila-task-reminder-scheduler**: Responsável pelo notificador/lembrete de tarefas de forma antecipada.
-
-
-<pre>  docker-compose up --build -d</pre>
-Aguarde até que o docker informe que os contêineres foram lançados com sucesso.
+    Aguarde até que o docker informe que os contêineres foram lançados com sucesso.
 
 5. Atualize o banco de dados:
-<pre> docker exec -it vila-task-reminder bash</pre>
-Se executado com sucesso, você agora tem acesso ao terminal do ambiente conteineirizado.
-Execute as migrations:
-<pre> php artisan doctrine:migrations:migrate</pre>
+    <pre> docker exec -it vila-task-reminder bash</pre>
+    Se executado com sucesso, você agora tem acesso ao terminal do ambiente conteineirizado.
+    Execute as migrations:
+    <pre> php artisan doctrine:migrations:migrate</pre>
 
-Pronto. A API estará disponível, por padrão, no endereço da [ máquina local na porta 8000](http://localhost:8000).
+    Pronto. A API estará disponível, por padrão, no endereço da [ máquina local na porta 8000](http://localhost:8000).
 
 
 ## :dark_sunglasses: Demonstração da aplicação
@@ -97,7 +94,6 @@ Recomendamos o [Postman](https://www.postman.com/) para realização de requisi�
 - Como não há tratamento de níveis de acesso, para este exemplo, só é permitido ao usuário 
 alterar e excluir seus próprios dados.
 
-<!-- > **Alerta**: Embora seja recomendado utilizar versões estáveis mais atualizadas da linguagem, é uma imposição do serviço de hospedagem da universidade que a versão do PHP seja 5.3.  -->
 
 <!-- # :closed_book: Licença -->
 # :ghost: Problemas
