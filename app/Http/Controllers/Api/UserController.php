@@ -72,6 +72,10 @@ class UserController extends Controller
 
         $users = EntityManager::getRepository('App\User')->find($request->id);
 
+        if ($request->user('api')->getId() != $request->id) {
+            throw new ApiException("Unauthorized", 401);
+        }
+
         $policy = new Policy\Auto;
         $policy->inside([
             'user' => new Policy\To\Skip(),

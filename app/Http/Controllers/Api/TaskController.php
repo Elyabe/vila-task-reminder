@@ -37,7 +37,7 @@ class TaskController extends Controller
             'user' => new Policy\To\Skip(),
         ]);
 
-        $tasks =  EntityManager::getRepository('App\Task')->findAll();
+        $tasks =  EntityManager::getRepository('App\Task')->findByUser($request->user('api'));
         $tasks =  Transformable::toArrays($tasks, $policy);
 
         return response()->json($tasks, 200);
@@ -108,6 +108,7 @@ class TaskController extends Controller
             'description' => 'string|max:500',
             'date' => 'date_format:Y-m-d H:i',
             'done' => 'boolean',
+            'with.*' => 'email|exists:App\User,email'
         ]);
 
         if ($validator->fails()) {
@@ -117,8 +118,6 @@ class TaskController extends Controller
         }
 
 
-        $user = EntityManager::getRepository('App\User')->find($request->userId);
-
         $task = new Task;
         $task->setTitle($request->title)
             ->setCreatedAt(new DateTime())
@@ -127,9 +126,30 @@ class TaskController extends Controller
             ->setUser($request->user('api'));
 
         EntityManager::persist($task);
+
+
+        foreach ($request->with as $email) {
+            $user = EntityManager::getRepository('App\User')->findOneByEmail($email);
+
+            $joinTask = new Task;
+            $joinTask->setTitle($request->title)
+                ->setCreatedAt(new DateTime())
+                ->setUpdatedAt(new DateTime())
+                ->setDate(new DateTime($request->date))
+                ->setUser($user);
+
+            EntityManager::persist($joinTask);
+        }
+
         EntityManager::flush();
 
-        return response()->json($task->toArray(), 201);
+
+        $policy = new Policy\Auto;
+        $policy->inside([
+            'user' => new Policy\To\Skip(),
+        ]);
+
+        return response()->json($task->toArray($policy), 201);
     }
 
 

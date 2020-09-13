@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
 use Illuminate\View\View;
 
 /*
@@ -47,4 +46,7 @@ Route::get('email/resend', 'Auth\VerificationController@resend')->name('verifica
 // Documentation
 Route::get('doc', function (Request $request) {
     return View('apidoc.index');
+});
+Route::get('/', function (Request $request) {
+    return redirect('/doc');
 });
