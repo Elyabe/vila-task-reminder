@@ -18,7 +18,7 @@ class EnsureEmailIsVerified
     {
         $user = $request->user('api');
         if (!$user || $user instanceof \App\User  && !$user->hasVerifiedEmail()) {
-            throw new ApiException('This user e-mail address is unverified.', 400);
+            throw new ApiException('Invalid Token or This user e-mail address is unverified.', 400);
         }
         return $next($request);
     }

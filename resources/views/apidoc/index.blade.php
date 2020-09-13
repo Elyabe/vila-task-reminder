@@ -86,6 +86,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/auth/password-change</code></p>
 <h4>URL Parameters</h4>
@@ -176,6 +182,16 @@ fetch(url, {
 <p>Example response (400):</p>
 </blockquote>
 <pre><code class="language-json">null</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": {
+        "email": [
+            "The email must be a valid email address."
+        ]
+    }
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/auth/login</code></p>
 <h4>Body Parameters</h4>
@@ -235,46 +251,11 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
-<pre><code class="language-json">[
-    {
-        "__meta": {
-            "class": "App\\Task"
-        },
-        "id": "3c8e83c5-f535-11ea-8572-5cc9d37d7d78",
-        "title": "Task 1",
-        "date": "2020-09-07T09:47:00.000Z",
-        "createdAt": "2020-09-12T17:19:18.000Z",
-        "updatedAt": "2020-09-12T17:19:18.000Z",
-        "description": "Description task 1",
-        "done": true
-    },
-    {
-        "__meta": {
-            "class": "App\\Task"
-        },
-        "id": "3c8e91b1-f535-11ea-8572-5cc9d37d7d78",
-        "title": "Task 2",
-        "date": "2020-09-07T10:30:00.000Z",
-        "createdAt": "2020-09-12T17:19:18.000Z",
-        "updatedAt": "2020-09-12T17:19:18.000Z",
-        "description": "",
-        "done": false
-    },
-    {
-        "__meta": {
-            "class": "App\\Task"
-        },
-        "id": "3c8e9c7e-f535-11ea-8572-5cc9d37d7d78",
-        "title": "Task C",
-        "date": "2020-09-07T09:30:00.000Z",
-        "createdAt": "2020-09-12T17:19:18.000Z",
-        "updatedAt": "2020-09-12T17:19:18.000Z",
-        "description": "",
-        "done": true
-    }
-]</code></pre>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/tasks</code></p>
 <!-- END_4227b9e5e54912af051e8dd5472afbce -->
@@ -307,19 +288,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "__meta": {
-        "class": "App\\Task"
-    },
-    "id": "3c8e83c5-f535-11ea-8572-5cc9d37d7d78",
-    "title": "Task 1",
-    "date": "2020-09-07T09:47:00.000Z",
-    "createdAt": "2020-09-12T17:19:18.000Z",
-    "updatedAt": "2020-09-12T17:19:18.000Z",
-    "description": "Description task 1",
-    "done": true
+    "error": "Authorization Token not Found."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/tasks/{id}</code></p>
@@ -379,6 +351,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/tasks</code></p>
 <h4>Body Parameters</h4>
@@ -456,6 +434,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/tasks/{id}</code></p>
 <h4>URL Parameters</h4>
@@ -535,6 +519,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/tasks/{id}</code></p>
 <h4>URL Parameters</h4>
@@ -589,6 +579,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/tasks/import</code></p>
 <h4>Body Parameters</h4>
@@ -642,22 +638,11 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
-<pre><code class="language-json">[
-    {
-        "__meta": {
-            "class": "App\\User"
-        },
-        "id": "2e55ba0a-f524-11ea-8572-5cc9d37d7d78",
-        "email": "elyabe@outlook.com",
-        "cpf": "153.885.557-71",
-        "phoneNumber": "(27) 99726-9090",
-        "emailVerifiedAt": "2020-09-12T15:17:13.000Z",
-        "createdAt": "2020-09-12T15:17:13.000Z",
-        "updatedAt": "2020-09-12T15:17:13.000Z"
-    }
-]</code></pre>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users</code></p>
 <!-- END_fc1e4f6a697e3c48257de845299b71d5 -->
@@ -690,21 +675,10 @@ fetch(url, {
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "__meta": {
-        "class": "App\\User"
-    },
-    "id": "2e55ba0a-f524-11ea-8572-5cc9d37d7d78",
-    "email": "elyabe@outlook.com",
-    "cpf": "153.885.557-71",
-    "password": "$2y$10$1JIm7KlbEjNGVE5j.oS8nuVAogkZxtOfGXpFtfJt6VFjbOIW1ckX2",
-    "phoneNumber": "(27) 99726-9090",
-    "rememberToken": null,
-    "emailVerifiedAt": "2020-09-12T15:17:13.000Z",
-    "createdAt": "2020-09-12T15:17:13.000Z",
-    "updatedAt": "2020-09-12T15:17:13.000Z"
+    "error": "Authorization Token not Found."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/users/{id}</code></p>
@@ -726,91 +700,6 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_01075f2107bd5c278b05766440915f79 -->
-<!-- START_12e37982cc5398c7100e59625ebb5514 -->
-<h2>Create an user</h2>
-<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Create an user and returns a JSON containing the new user's information including ID</p>
-<blockquote>
-<p>Example request:</p>
-</blockquote>
-<pre><code class="language-bash">curl -X POST \
-    "http://localhost:8000/api/users" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json" \
-    -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU" \
-    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
-</code></pre>
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/users"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU",
-};
-
-let body = {
-    "email": "culpa",
-    "password": "culpa",
-    "confirmPassword": "culpa",
-    "phoneNumber": "culpa",
-    "cpf": "culpa"
-}
-
-fetch(url, {
-    method: "POST",
-    headers: headers,
-    body: body
-})
-    .then(response =&gt; response.json())
-    .then(json =&gt; console.log(json));</code></pre>
-<h3>HTTP Request</h3>
-<p><code>POST api/users</code></p>
-<h4>Body Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Status</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>email</code></td>
-<td>string</td>
-<td>required</td>
-<td>The email address of the user</td>
-</tr>
-<tr>
-<td><code>password</code></td>
-<td>string</td>
-<td>required</td>
-<td>The password of the user</td>
-</tr>
-<tr>
-<td><code>confirmPassword</code></td>
-<td>string</td>
-<td>required</td>
-<td>The password confirmation of the user</td>
-</tr>
-<tr>
-<td><code>phoneNumber</code></td>
-<td>string</td>
-<td>required</td>
-<td>The phone number of the user</td>
-</tr>
-<tr>
-<td><code>cpf</code></td>
-<td>string</td>
-<td>required</td>
-<td>string The number of CPF document of the user</td>
-</tr>
-</tbody>
-</table>
-<!-- END_12e37982cc5398c7100e59625ebb5514 -->
 <!-- START_9332edb67641ad6a0c477285396a59e6 -->
 <h2>Update an user</h2>
 <p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
@@ -848,6 +737,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>PUT api/users/{id}</code></p>
 <h4>URL Parameters</h4>
@@ -927,6 +822,12 @@ fetch(url, {
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": "Authorization Token not Found."
+}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>DELETE api/users/{id}</code></p>
 <h4>URL Parameters</h4>
@@ -947,6 +848,110 @@ fetch(url, {
 </tbody>
 </table>
 <!-- END_fceddd82d8c88376fcee403bd01f165a -->
+<!-- START_12e37982cc5398c7100e59625ebb5514 -->
+<h2>Create an user</h2>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
+Create an user and returns a JSON containing the new user's information including ID</p>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X POST \
+    "http://localhost:8000/api/users" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU" \
+    -d '{"email":"culpa","password":"culpa","confirmPassword":"culpa","phoneNumber":"culpa","cpf":"culpa"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/users"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU",
+};
+
+let body = {
+    "email": "culpa",
+    "password": "culpa",
+    "confirmPassword": "culpa",
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<blockquote>
+<p>Example response (400):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "error": {
+        "email": [
+            "The email must be a valid email address."
+        ],
+        "password": [
+            "The password must be at least 6 characters."
+        ],
+        "cpf": [
+            "The cpf must be a valid number."
+        ],
+        "phoneNumber": [
+            "The phone number must be valid."
+        ]
+    }
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>POST api/users</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>email</code></td>
+<td>string</td>
+<td>required</td>
+<td>The email address of the user</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>string</td>
+<td>required</td>
+<td>The password of the user</td>
+</tr>
+<tr>
+<td><code>confirmPassword</code></td>
+<td>string</td>
+<td>required</td>
+<td>The password confirmation of the user</td>
+</tr>
+<tr>
+<td><code>phoneNumber</code></td>
+<td>string</td>
+<td>required</td>
+<td>The phone number of the user</td>
+</tr>
+<tr>
+<td><code>cpf</code></td>
+<td>string</td>
+<td>required</td>
+<td>string The number of CPF document of the user</td>
+</tr>
+</tbody>
+</table>
+<!-- END_12e37982cc5398c7100e59625ebb5514 -->
 <h1>general</h1>
 <!-- START_cd4a874127cd23508641c63b640ee838 -->
 <h2>doc.json</h2>
@@ -981,7 +986,7 @@ fetch(url, {
     "variables": [],
     "info": {
         "name": "VilaTaskReminder API",
-        "_postman_id": "d4ac70e3-80c2-4b30-80b4-6d27c31f24ca",
+        "_postman_id": "5eb17cff-ab44-4013-b2f9-ade116f7223b",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -1382,7 +1387,7 @@ fetch(url, {
                             "mode": "raw",
                             "raw": "{\n    \"email\": \"culpa\",\n    \"password\": \"culpa\",\n    \"confirmPassword\": \"culpa\",\n    \"phoneNumber\": \"culpa\",\n    \"cpf\": \"culpa\"\n}"
                         },
-                        "description": "Register a new user",
+                        "description": "Create an user and returns a JSON containing the new user's information including ID",
                         "response": []
                     }
                 },
@@ -1420,9 +1425,9 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"joao@gmail.com\",\n    \"phoneNumber\": \"culpa\",\n    \"cpf\": \"culpa\",\n    \"done\": false\n}"
+                            "raw": "{\n    \"email\": \"joao@gmail.com\",\n    \"phoneNumber\": \"(27) 99726-0000\",\n    \"cpf\": \"153.564.153-71\"\n}"
                         },
-                        "description": "Update an user by id",
+                        "description": "Update an user by id and return a JSON containing updated user information",
                         "response": []
                     }
                 },
