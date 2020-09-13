@@ -4,7 +4,7 @@
 </p> -->
 
 # :rocket: Vila Task Reminder - API
-[![PHP](https://img.shields.io/static/v1?label=PHP&message=7.4&colorA=purple&color=black&logo=PHP&logoColor=white)](https://www.php.net/) [![Laravel](https://img.shields.io/static/v1?label=Laravel&message=v6&colorA=darkred&color=black&logo=Laravel&logoColor=white)](https://laravel.com/) [![ApidocGen](https://img.shields.io/static/v1?label=apiDoc&message=4.8colorA=pink&color=black&logo=javascript&logoColor=white)](https://github.com/mpociot/laravel-apidoc-generator) [![MySQL](https://img.shields.io/static/v1?label=MySQL&message=5.7&colorA=darkblue&color=black&logo=mysql&logoColor=white)](https://mysql.com/) [![Symfony Doctrine ORM](https://img.shields.io/static/v1?label=Symfony%20Doctrine&message=6.0&colorA=blue&color=black&logo=symfony)](https://www.doctrine-project.org/) [![PHPUnit](https://img.shields.io/static/v1?label=PHPUnit&message=7.0&colorA=blue&color=black&logo=PHP&logoColor=white)](https://phpunit.de/) 
+[![PHP](https://img.shields.io/static/v1?label=PHP&message=7.4&colorA=purple&color=black&logo=PHP&logoColor=white)](https://www.php.net/) [![Laravel](https://img.shields.io/static/v1?label=Laravel&message=v6&colorA=darkred&color=black&logo=Laravel&logoColor=white)](https://laravel.com/) [![ApidocGen](https://img.shields.io/static/v1?label=apiDocGenerator&message=4.8&colorA=pink&color=black&logo=javascript&logoColor=white)](https://github.com/mpociot/laravel-apidoc-generator) [![MySQL](https://img.shields.io/static/v1?label=MySQL&message=5.7&colorA=darkblue&color=black&logo=mysql&logoColor=white)](https://mysql.com/) [![Symfony Doctrine ORM](https://img.shields.io/static/v1?label=Symfony%20Doctrine&message=6.0&colorA=blue&color=black&logo=symfony)](https://www.doctrine-project.org/) [![PHPUnit](https://img.shields.io/static/v1?label=PHPUnit&message=7.0&colorA=blue&color=black&logo=PHP&logoColor=white)](https://phpunit.de/) 
 
 ## :book: Overview 
 API Rest para agendamento e lembrete de tarefas que permite:
@@ -14,9 +14,17 @@ API Rest para agendamento e lembrete de tarefas que permite:
     - O usuário é informado por email 10 minutos antes da sua tarefa;
     - O usuário pode enviar uma tabela (do excel) contendo uma lista de tarefas;
 
-Recursos:
+Recursos disponíveis:
 - User
+    * Registro
+    * Verificação de E-mail
+    * Atualização
+    * Deleção
 - Task
+    * Agendamento
+    * Atualização
+    * Exclusão
+    * Importação de arquivo excel (.xlsx)
 
 Você pode acessar mais detalhes na seção [Documentação](#books-Documentação-da-API)
 
@@ -39,11 +47,6 @@ A versão em desenvolvimento da API pode ser acessada pelo endpoint: [http://dev
 Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restrições podem ser acessados <b>[aqui](http://dev.elyabe.com/api/doc)</b>. Nela também conta em anexo uma coleção do Postman pronta para uso.
 
 ## :dark_sunglasses: Configurando ambiente de desenvolvimento
-A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada utilizando o <i> docker-compose</i> em três contêineres:
-
-- vila-task-reminder: Conteiner da aplicação
-- vila-task-reminder-mysql: Conteiner suporte da base de dados da aplicação
-- vila-task-reminder-scheduler: Responsável pelo notificador/lembrete de tarefas de forma antecipada.
 
 
 1. Clone este projeto;
@@ -57,6 +60,14 @@ A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada ut
 Modifique as variáveis caso necessário.
 
 4. Lance o container com o comando
+
+A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada utilizando o <i> docker-compose</i> em três contêineres:
+
+- **vila-task-reminder**: Conteiner da servidor Apache2 + PHP7
+- **vila-task-reminder-mysql**: Conteiner suporte da base de dados da aplicação
+- **vila-task-reminder-scheduler**: Responsável pelo notificador/lembrete de tarefas de forma antecipada.
+
+
 <pre>  docker-compose up --build -d</pre>
 Aguarde até que o docker informe que os contêineres foram lançados com sucesso.
 
@@ -78,25 +89,17 @@ Um e-mail será enviado ao endereço informado no corpo da requisição contendo
 
 Recomendamos o [Postman](https://www.postman.com/) para realização de requisições. Um arquivo inicial com todas as requisições pode ser baixado a seguir.
 
-> [Baixe os arquivos do Postman](https://github.com/ppc-choice/dev.api.ppcchoice.ufes.br/tree/master/postman)
+<!-- > [Baixe os arquivos do Postman](https://github.com/ppc-choice/dev.api.ppcchoice.ufes.br/tree/master/postman) -->
 
-# :ghost: Problemas
-
-Sinta-se à vontade em registrar novos problemas. Caso tenha encontrado a solução, ficaríamos gratos em analisar tal situação. 
-
-Caso encontre algum problema, por favor, faça uma *issue* descrevendo o problema e não se esqueça de incluir as etapas para que possamos reproduzi-lo facilmente.
-
-# :balloon: Contribuição
-
-Caso você tenha alguma ideia para melhorias, sinta-se a vontade em compartilhar por meio de uma *issue*, mas não espere uma resposta em tempo hábil.
-
-Guia e protocolo de contribuição:
-
-#### 1. :pushpin: Pré-requisitos e limitações
+#### :pushpin: Pré-requisitos e limitações
 
 - Como não há tratamento de níveis de acesso, para este exemplo, só é permitido ao usuário 
 alterar e excluir seus próprios dados.
 
-> **Alerta**: Embora seja recomendado utilizar versões estáveis mais atualizadas da linguagem, é uma imposição do serviço de hospedagem da universidade que a versão do PHP seja 5.3. 
+<!-- > **Alerta**: Embora seja recomendado utilizar versões estáveis mais atualizadas da linguagem, é uma imposição do serviço de hospedagem da universidade que a versão do PHP seja 5.3.  -->
 
 <!-- # :closed_book: Licença -->
+# :ghost: Problemas
+
+Fique à vontade para contribuir ou registrar *bugs*. Abra uma *issue* descrevendo o problema e não se esqueça de incluir as etapas para que possamos reproduzi-lo facilmente.
+

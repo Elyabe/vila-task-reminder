@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
 use App\User;
 use DateTime;
@@ -177,6 +178,9 @@ class UserController extends Controller
             ], 400);
         }
 
+        if ($request->user('api')->getId() != $request->id) {
+            throw new ApiException("Unauthorized", 401);
+        }
 
         $params = $request->only('email', 'cpf', 'phoneNumber');
 
@@ -252,6 +256,10 @@ class UserController extends Controller
                 'exists' => 'User not found.',
             ]
         );
+
+        if ($request->user('api')->getId() != $request->id) {
+            throw new ApiException("Unauthorized", 401);
+        }
 
         if ($validator->fails()) {
             return response()->json([

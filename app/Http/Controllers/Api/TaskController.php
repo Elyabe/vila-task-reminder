@@ -79,6 +79,10 @@ class TaskController extends Controller
 
         $task = EntityManager::getRepository('App\Task')->find($request->id);
 
+        if ($request->user('api')->getId() != $task->getUser()->getId()) {
+            throw new ApiException("Unauthorized", 401);
+        }
+
         return response()->json(
             $task->toArray($policy),
             200
@@ -99,7 +103,7 @@ class TaskController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'userId' => 'required|uuid|exists:App\User,id',
+            // 'userId' => 'required|uuid|exists:App\User,id',
             'title' => 'required|string|min:2|max:255',
             'description' => 'string|max:500',
             'date' => 'date_format:Y-m-d H:i',
@@ -120,7 +124,7 @@ class TaskController extends Controller
             ->setCreatedAt(new DateTime())
             ->setUpdatedAt(new DateTime())
             ->setDate(new DateTime($request->date))
-            ->setUser($user);
+            ->setUser($request->user('api'));
 
         EntityManager::persist($task);
         EntityManager::flush();
@@ -180,6 +184,10 @@ class TaskController extends Controller
         }
 
         $task = EntityManager::find('App\Task', $request->id);
+
+        if ($request->user('api')->getId() != $task->getUser()->getId()) {
+            throw new ApiException("Unauthorized", 401);
+        }
 
         if (array_key_exists('title', $params)) {
             $task->setTitle($params['title']);
@@ -242,6 +250,10 @@ class TaskController extends Controller
         }
 
         $task = EntityManager::find('App\Task', $request->id);
+
+        if ($request->user('api')->getId() != $task->getUser()->getId()) {
+            throw new ApiException("Unauthorized", 401);
+        }
 
         EntityManager::remove($task);
         EntityManager::flush();
