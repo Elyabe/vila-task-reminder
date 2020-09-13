@@ -1,72 +1,102 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+<!-- # Logo ou Banner -->
+<!-- <p align="center">
+   <img src="https://trello-attachments.s3.amazonaws.com/5c3b9c9903d1b107b15a5271/182x42/078f443628a4ad74cafa0b01f44b4a7f/ppclogov1-2.png" alt="PPC Choice" width="280"/>
+</p> -->
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# :rocket: Vila Task Reminder - API
+[![PHP](https://img.shields.io/static/v1?label=PHP&message=7.4&colorA=purple&color=black&logo=PHP&logoColor=white)](https://www.php.net/) [![Laravel](https://img.shields.io/static/v1?label=Laravel&message=v6&colorA=darkred&color=black&logo=Laravel&logoColor=white)](https://laravel.com/) [![ApidocGen](https://img.shields.io/static/v1?label=apiDoc&message=4.8colorA=pink&color=black&logo=javascript&logoColor=white)](https://github.com/mpociot/laravel-apidoc-generator) [![MySQL](https://img.shields.io/static/v1?label=MySQL&message=5.7&colorA=darkblue&color=black&logo=mysql&logoColor=white)](https://mysql.com/) [![Symfony Doctrine ORM](https://img.shields.io/static/v1?label=Symfony%20Doctrine&message=6.0&colorA=blue&color=black&logo=symfony)](https://www.doctrine-project.org/) [![PHPUnit](https://img.shields.io/static/v1?label=PHPUnit&message=7.0&colorA=blue&color=black&logo=PHP&logoColor=white)](https://phpunit.de/) 
 
-## About Laravel
+## :book: Overview 
+API Rest para agendamento e lembrete de tarefas que permite:
+    - Cadastro e login de usuários com autenticação via JWT
+    - Confirmação de cadastro por email;
+    - Cadastro de tarefas do usuário (nome, data, hora);
+    - O usuário é informado por email 10 minutos antes da sua tarefa;
+    - O usuário pode enviar uma tabela (do excel) contendo uma lista de tarefas;
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Recursos:
+- User
+- Task
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Você pode acessar mais detalhes na seção [Documentação](#books-Documentação-da-API)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Sumário
 
-## Learning Laravel
+* [Documentação](#books-Documentação-da-API)
+* [Demonstração](#dark_sunglasses-Demonstração-da-aplicação)
+* [Problemas](#ghost-Problemas)
+* [Contribuição](#balloon-Contribuição)
+  * [Limitações](#1-pushpin-Pré-requisitos-e-limitações)
+  <!-- * [Fork este repositório e realize alterações](#2-fork_and_knife-Fork-este-repositório-e-realize-alterações) -->
+  <!-- * [Planeje e execute testes](#3-clipboard-Planeje-e-execute-testes) -->
+  <!-- * [Solicite a incorporação](#4-heavy_check_mark-Solicite-a-incorporação) -->
+<!-- * [Autores](#pencil2-Autores) -->
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## :books: Documentação da API 
+A versão em desenvolvimento da API pode ser acessada pelo endpoint: [http://dev.elyabe.com/api](http://dev.elyabe.com/api)
 
-## Laravel Sponsors
+Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restrições podem ser acessados <b>[aqui](http://dev.elyabe.com/api/doc)</b>. Nela também conta em anexo uma coleção do Postman pronta para uso.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## :dark_sunglasses: Configurando ambiente de desenvolvimento
+A fim de facilitar as tarefas de desenvolvimento, a API está conteineirizada utilizando o <i> docker-compose</i> em três contêineres:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+- vila-task-reminder: Conteiner da aplicação
+- vila-task-reminder-mysql: Conteiner suporte da base de dados da aplicação
+- vila-task-reminder-scheduler: Responsável pelo notificador/lembrete de tarefas de forma antecipada.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. Clone este projeto;
+    <code> git clone [url] </code>
+2. Instale as dependências utilizando o Composer, executando o seguinte comando na raíz do projeto
+<code> composer install </code>
 
-## Security Vulnerabilities
+3. Configure as variáveis de ambiente execute o seguinte comando também na raíz do projeto
+<code> cp .env.example .env </code> 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Modifique as variáveis caso necessário.
 
-## License
+4. Lance o container com o comando
+<pre>  docker-compose up --build -d</pre>
+Aguarde até que o docker informe que os contêineres foram lançados com sucesso.
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. Atualize o banco de dados:
+<pre> docker exec -it vila-task-reminder bash</pre>
+Se executado com sucesso, você agora tem acesso ao terminal do ambiente conteineirizado.
+Execute as migrations:
+<pre> php artisan doctrine:migrations:migrate</pre>
+
+Pronto. A API estará disponível, por padrão, no endereço da [ máquina local na porta 8000](http://localhost:8000).
+
+
+## :dark_sunglasses: Demonstração da aplicação
+
+Uma vez que, para consumir os recursos da API é necessário que o usuário esteja autenticado e com o e-mail verificado, sua primeira tarefa, será [registrar-se](http://dev.elyabe.com/api/doc#create-an-user);
+
+Um e-mail será enviado ao endereço informado no corpo da requisição contendo informações para que o usuário tenha a conta verificada.
+
+
+Recomendamos o [Postman](https://www.postman.com/) para realização de requisições. Um arquivo inicial com todas as requisições pode ser baixado a seguir.
+
+> [Baixe os arquivos do Postman](https://github.com/ppc-choice/dev.api.ppcchoice.ufes.br/tree/master/postman)
+
+# :ghost: Problemas
+
+Sinta-se à vontade em registrar novos problemas. Caso tenha encontrado a solução, ficaríamos gratos em analisar tal situação. 
+
+Caso encontre algum problema, por favor, faça uma *issue* descrevendo o problema e não se esqueça de incluir as etapas para que possamos reproduzi-lo facilmente.
+
+# :balloon: Contribuição
+
+Caso você tenha alguma ideia para melhorias, sinta-se a vontade em compartilhar por meio de uma *issue*, mas não espere uma resposta em tempo hábil.
+
+Guia e protocolo de contribuição:
+
+#### 1. :pushpin: Pré-requisitos e limitações
+
+- Como não há tratamento de níveis de acesso, para este exemplo, só é permitido ao usuário 
+alterar e excluir seus próprios dados.
+
+> **Alerta**: Embora seja recomendado utilizar versões estáveis mais atualizadas da linguagem, é uma imposição do serviço de hospedagem da universidade que a versão do PHP seja 5.3. 
+
+<!-- # :closed_book: Licença -->
