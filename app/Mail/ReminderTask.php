@@ -34,8 +34,8 @@ class ReminderTask extends Mailable
     public function build()
     {
         return $this->markdown('emails.reminder_task')
-            ->subject($this->task->getTitle())
-            ->from(env('MAIL_ADDRESS_FROM'), env('MAIL_NAME_FROM'))
+            ->subject("[VILA TASK REMINDER] {$this->task->getTitle()}")
+            ->from('not-answer@vila.challenge.com', env('MAIL_NAME_FROM'))
             ->with([
                 'user' => $this->user,
                 'task' => $this->task
