@@ -8,11 +8,11 @@
 
 ## :book: Overview 
 API Rest para agendamento e lembrete de tarefas que permite:
-    - Cadastro e login de usuários com autenticação via JWT
-    - Confirmação de cadastro por email;
-    - Cadastro de tarefas do usuário (nome, data, hora);
-    - O usuário é informado por email 10 minutos antes da sua tarefa;
-    - O usuário pode enviar uma tabela (do excel) contendo uma lista de tarefas;
+- Cadastro e login de usuários com autenticação via JWT
+- Confirmação de cadastro por email;
+- Cadastro de tarefas do usuário (nome, data, hora);
+- O usuário é informado por email 10 minutos antes da sua tarefa;
+- Importação de lista de tarefas por meio de arquivo Excel (.xlsx);
 
 Recursos disponíveis:
 - User
@@ -25,8 +25,9 @@ Recursos disponíveis:
     * Atualização
     * Exclusão
     * Importação de arquivo excel (.xlsx)
+    * **(PLUS)** Agendamento de tarefa compartilhada com outro usuário
 
-Você pode acessar mais detalhes na seção [Documentação](#books-Documentação-da-API)
+Você pode acessar mais detalhes na seção [Documentação](#books-Documentação-da-API).
 
 ### Sumário
 
@@ -42,7 +43,7 @@ Você pode acessar mais detalhes na seção [Documentação](#books-Documentaç�
 
 
 ## :books: Documentação da API 
-A versão em desenvolvimento da API pode ser acessada pelo endpoint: [http://dev.elyabe.com/api](http://dev.elyabe.com/api)
+A versão em desenvolvimento da API pode ser acessada pelo endpoint: [http://dev.elyabe.com/api](http://dev.elyabe.com/api).
 
 Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restrições podem ser acessados <b>[aqui](http://dev.elyabe.com/api/doc)</b>. Nela também conta em anexo uma coleção do Postman pronta para uso.
 
@@ -50,12 +51,12 @@ Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restri
 
 
 1. Clone este projeto;
-    <code> git clone [url] </code>
+    <pre> git clone [url] </pre>
 2. Instale as dependências utilizando o Composer, executando o seguinte comando na raíz do projeto
-<code> composer install </code>
+<pre> composer install </pre>
 
 3. Configure as variáveis de ambiente execute o seguinte comando também na raíz do projeto
-<code> cp .env.example .env </code> 
+<pre> cp .env.example .env </pre> 
 
 Modifique as variáveis caso necessário.
 
