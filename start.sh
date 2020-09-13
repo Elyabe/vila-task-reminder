@@ -7,7 +7,6 @@ env=${APP_ENV:-production}
 
 php /var/www/html/artisan config:cache
 
-
 if [ "$role" = "app" ]; then
 
     exec apache2-foreground
@@ -18,7 +17,6 @@ elif [ "$role" = "queue" ]; then
     php /var/www/html/artisan queue:work --memory=3800 --queue=bigjob --timeout=9600 --tries=1
 
 elif [ "$role" = "scheduler" ]; then
-
     while [ true ]
     do
       php /var/www/html/artisan schedule:run --verbose --no-interaction &

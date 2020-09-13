@@ -39,3 +39,30 @@ services:
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+  scheduler:
+    container_name: vila-task-reminder-scheduler
+    build: .
+    depends_on:
+      - mysql
+      - app
+    volumes:
+      - .:/var/www/html
+    links:
+      - mysql:mysql
+    environment:
+      APP_NAME: ${APP_NAME}
+      APP_ENV: ${APP_ENV}
+      APP_KEY: ${APP_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      APP_DEBUG: ${APP_DEBUG}
+      APP_URL: ${APP_URL}
+
+      DB_HOST: mysql
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      SESSION_DRIVER: file
+      CACHE_DRIVER: file
+      QUEUE_DRIVER: sync
+
+      CONTAINER_ROLE: scheduler

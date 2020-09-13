@@ -26,6 +26,7 @@ RUN apt-get install -qy git curl libmcrypt-dev default-mysql-client \
     libpng-dev
 
 RUN apt-get install -y zlib1g-dev libicu-dev g++ libzip-dev
+RUN docker-php-ext-install zip
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install intl
 
@@ -42,4 +43,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN chown -R $USER:www-data ./storage/*
 RUN chmod -R 775 ./bootstrap/cache/
-RUN chmod 777 -R storage
+RUN chmod 777 -R ./storage
+
+ENTRYPOINT ["start"]
