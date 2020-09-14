@@ -880,7 +880,7 @@ fetch(url, {
     "variables": [],
     "info": {
         "name": "VilaTaskReminder",
-        "_postman_id": "a74d85c1-27e1-498c-995e-88917d337b13",
+        "_postman_id": "009d6675-4b93-4823-918a-8cbf3680a250",
         "description": "An API for task schedule and reminder",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
@@ -1099,7 +1099,7 @@ fetch(url, {
                             "mode": "raw",
                             "raw": "{\n    \"title\": \"culpa\",\n    \"description\": \"culpa\",\n    \"date\": \"culpa\"\n}"
                         },
-                        "description": "Update a task by id",
+                        "description": "Update a task by id and return updated task info",
                         "response": []
                     }
                 },

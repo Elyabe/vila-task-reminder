@@ -123,7 +123,7 @@ class AuthController extends Controller
             throw new ApiException("Bad Credentials.", 401);
         }
 
-        $user->setPassword(Hash::make($request->password))
+        $user->setPassword(Hash::make($request->newPassword))
             ->setUpdatedAt(new DateTime());
 
         EntityManager::merge($user);
@@ -137,7 +137,7 @@ class AuthController extends Controller
 
         return response()->json(
             [
-                'message' => 'Password changed.',
+                'message' => 'Password has been changed.',
             ],
             200
         );
