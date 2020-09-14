@@ -29,6 +29,7 @@ services:
       QUEUE_DRIVER: sync
 
       CONTAINER_ROLE: ${CONTAINER_ROLE}
+    restart: unless-stopped
   mysql:
     image: mysql:5.6
     container_name: vila-task-reminder-mysql
@@ -39,6 +40,9 @@ services:
       - MYSQL_USER=${DB_USERNAME}
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: unless-stopped
   scheduler:
     container_name: vila-task-reminder-scheduler
     build: .
@@ -66,3 +70,4 @@ services:
       QUEUE_DRIVER: sync
 
       CONTAINER_ROLE: scheduler
+    restart: unless-stopped
