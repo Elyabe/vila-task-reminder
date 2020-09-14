@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use LaravelDoctrine\ORM\Facades\EntityManager;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Indaxia\OTR\Annotations\Policy;
+use Tymon\JWTAuth\JWT;
 
 /**
  * @group  Auth management
@@ -151,6 +152,8 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->auth('api')->invalidate(true);
+        JWTAuth::parseToken()->invalidate();
+
+        return response('', $status = 204);
     }
 }
