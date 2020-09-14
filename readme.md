@@ -111,6 +111,9 @@ Um e-mail será enviado ao endereço informado no corpo da requisição contendo
 alterar e excluir seus próprios dados;
 - Não há suporte para as tarefas compartilhadas na função de importação de tarefas de um documento Excel;
 
+#### Testes:
+ - Você pode utilizar o arcabouço de testes incluído no diretório <code>tests</code>.
+
 <!-- # :closed_book: Licença -->
 # :ghost: Problemas
 
