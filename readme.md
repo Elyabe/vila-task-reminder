@@ -54,7 +54,7 @@ Ao atualizar a documentação, a nova versão pode ser disponibilizada executand
 
 
 1. Clone este projeto;
-    <pre> git clone [url] </pre>
+    <pre> git clone https://github.com/Elyabe/vila-task-reminder.git </pre>
 2. Instale as dependências utilizando o Composer, executando o seguinte comando na raíz do projeto
     <pre> composer install </pre>
 
@@ -98,10 +98,12 @@ Uma vez que, para consumir os recursos da API é necessário que o usuário este
 
 Um e-mail será enviado ao endereço informado no corpo da requisição contendo informações para que o usuário tenha a conta verificada.
 
+> [Vídeo demonstração](https://youtu.be/TiIDHRZhpXw)
 
-Recomendamos o [Postman](https://www.postman.com/) para realização de requisições. Um arquivo inicial com todas as requisições pode ser baixado a seguir.
+> [Baixe a collection do Postman](https://raw.githubusercontent.com/Elyabe/vila-task-reminder/master/storage/app/apidoc/collection.json?token=AGUIQY3IUGPIQ3BLUD2GWGK7NDC6I)
 
-<!-- > [Baixe os arquivos do Postman](https://github.com/ppc-choice/dev.api.ppcchoice.ufes.br/tree/master/postman) -->
+> [Exemplo de arquivo Excel para importação de tarefas](https://github.com/Elyabe/vila-task-reminder/blob/master/tasks-example.xlsx?raw=true)
+
 
 #### :pushpin: Pré-requisitos e limitações
 
