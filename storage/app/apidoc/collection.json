@@ -1,0 +1,584 @@
+{
+	"info": {
+		"_postman_id": "f7b8de50-f1cf-4aff-8654-b84e81ba9b7d",
+		"name": "VilaTaskReminder",
+		"description": "An API for task schedule and reminder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth management",
+			"item": [
+				{
+					"name": "Change password of the user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"123456\",\n    \"newPassword\": \"20202020\",\n    \"newPasswordConfirm\": \"20202020\"\n}"
+						},
+						"url": "{{baseUrl}}/auth/password-change"
+					},
+					"response": []
+				},
+				{
+					"name": "Authenticate an user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"elly.ufes@gmail.com\",\n    \"password\": \"20202020\"\n}"
+						},
+						"url": "{{baseUrl}}/auth/login",
+						"description": "Authenticate a user and returns the fields accessToken, tokenType, expiresIn and an object containing information of the logged in user"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{baseUrl}}/auth/logout",
+						"description": "Invalidate JWT Token"
+					},
+					"response": []
+				}
+			],
+			"description": "\n APIs for authenticate users",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Task management",
+			"item": [
+				{
+					"name": "Get all tasks",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"url": "{{baseUrl}}/tasks",
+						"description": "Get all registered tasks for authenticated user"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/tasks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "986c9358-f689-11ea-afbf-0242ac130002",
+									"description": "The UUID of the task"
+								}
+							]
+						},
+						"description": "Get an task by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Create an task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"culpa\",\n    \"description\": \"culpa\",\n    \"date\": \"2020-09-14 11:47\",\n    \"with\": [\"elyabe@outlook.com\"]\n}"
+						},
+						"url": "{{baseUrl}}/tasks",
+						"description": "Create a new task and returns the id, title, date, createdAt, updatedAt, description, done fields of the newly created task"
+					},
+					"response": []
+				},
+				{
+					"name": "Update a task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"new Title2\",\n    \"description\": \"Descritption\",\n    \"date\": \"2020-09-13 14:19\",\n    \"done\": false\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tasks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "986c9358-f689-11ea-afbf-0242ac130002",
+									"description": "The UUID of the task"
+								}
+							]
+						},
+						"description": "Update a task by id and return updated task info"
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy an task",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/tasks/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"tasks",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "986ca16b-f689-11ea-afbf-0242ac130002",
+									"description": "The UUID of the task"
+								}
+							]
+						},
+						"description": "Destroy an task by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Import tasks from .xlsx file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/ellyabsson/Desktop/tasks.xlsx"
+								}
+							]
+						},
+						"url": "{{baseUrl}}/tasks/import"
+					},
+					"response": []
+				}
+			],
+			"description": "\nAPIs for managing task",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User management",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"url": "{{baseUrl}}/users",
+						"description": "Returns all registered users"
+					},
+					"response": []
+				},
+				{
+					"name": "Get an user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8f4d7917-f691-11ea-b000-0242ac120002",
+									"description": "The UUID of the user"
+								}
+							]
+						},
+						"description": "Get an user by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Update an user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU",
+								"disabled": true
+							},
+							{
+								"key": "id",
+								"value": "8f4d7917-f691-11ea-b000-0242ac120002",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phoneNumber\": \"(27) 97959-2631\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "8f4d7917-f691-11ea-b000-0242ac120002",
+									"description": "The ID of the user"
+								}
+							]
+						},
+						"description": "Update an user by id and return a JSON containing updated user information"
+					},
+					"response": []
+				},
+				{
+					"name": "Destroy an user",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "culpa",
+									"description": "The ID of the user"
+								}
+							]
+						},
+						"description": "Destroy an user by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Create an user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"elly.ufes@gmail.com\",\n    \"phoneNumber\": \"(27) 99726-8097\",\n    \"cpf\": \"513.034.050-75\",\n    \"password\": \"123456\",\n    \"confirmPassword\": \"123456\"\n}"
+						},
+						"url": "{{baseUrl}}/users",
+						"description": "Create an user, returns  id, email, cpf, phoneNumber, emailVerifiedAt, createdAt, UpdatedAt fields of the newly created user and sends an email to the address informed to confirm the registration."
+					},
+					"response": []
+				}
+			],
+			"description": "APIs for managing users",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0ca8c752-ad42-4b26-b451-e9494093fe70",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d99e9e8f-442f-4995-8739-257f6b86bbb9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "90438b4f-16c8-4b1b-bda9-77be4c981221",
+			"key": "baseUrl",
+			"value": "http://dev.elyabe.com/api"
+		},
+		{
+			"id": "65bc2b91-cc49-43ba-90cd-d86e981af1fa",
+			"key": "token",
+			"value": "Bearer \"Token\""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
