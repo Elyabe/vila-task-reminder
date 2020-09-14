@@ -102,11 +102,11 @@ class TaskController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            // 'userId' => 'required|uuid|exists:App\User,id',
             'title' => 'required|string|min:2|max:255',
             'description' => 'string|max:500',
             'date' => 'date_format:Y-m-d H:i',
             'done' => 'boolean',
+            'with' => 'array',
             'with.*' => 'email|exists:App\User,email'
         ]);
 
