@@ -142,4 +142,15 @@ class AuthController extends Controller
             200
         );
     }
+
+    /**
+     * Logout
+     * @authenticated
+     * Invalid JWT user
+     *
+     */
+    public function logout(Request $request)
+    {
+        $request->auth('api')->invalidate(true);
+    }
 }

@@ -37,6 +37,7 @@ Route::post('users', 'Api\UserController@create');
 
 // Auth routes
 Route::post('auth/login', 'Api\AuthController@authenticate');
+Route::post('auth/logout', 'Api\AuthController@logout');
 
 // Email Verification Routes...
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
