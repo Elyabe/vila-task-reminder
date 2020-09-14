@@ -272,8 +272,15 @@ class UserController extends Controller
         }
 
         $user = EntityManager::find('App\User', $request->id);
-        EntityManager::remove($user);
-        EntityManager::flush();
+
+        try {
+            EntityManager::remove($user);
+            EntityManager::flush();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => 'For security, it is not allowed to delete user associated with tasks. Remove the associated tasks first.',
+            ], 400);
+        }
 
         return response('', $status = 204);
     }
