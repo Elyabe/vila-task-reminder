@@ -45,4 +45,7 @@ RUN chown -R $USER:www-data ./storage/*
 RUN chmod -R 775 ./bootstrap/cache/
 RUN chmod 777 -R ./storage
 
+RUN chgrp -R www-data storage bootstrap/cache
+RUN chmod -R ug+rwx storage bootstrap/cache
+
 ENTRYPOINT ["start"]
