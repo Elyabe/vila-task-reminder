@@ -70,12 +70,12 @@ return [
         /*
          * The name for the exported Postman collection. Default: config('app.name')." API"
          */
-        'name' => null,
+        'name' => env('APP_NAME', 'myApp'),
 
         /*
          * The description for the exported Postman collection.
          */
-        'description' => null,
+        'description' => 'An API for task schedule and reminder',
 
         /*
          * The "Auth" section that should appear in the postman collection. See the schema docs for more information:

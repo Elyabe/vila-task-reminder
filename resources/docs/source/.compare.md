@@ -25,7 +25,8 @@ Welcome to the generated API reference.
 
  APIs for authenticate users
 <!-- START_20f2ce9440ac1c2d392c5261f4483eba -->
-## api/auth/password-change
+## Change password of the user
+
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
@@ -94,7 +95,7 @@ Parameter | Type | Status | Description
 <!-- START_a925a8d22b3615f12fca79456d286859 -->
 ## Authenticate an user
 
-Authenticate a user
+Authenticate a user and returns the fields accessToken, tokenType, expiresIn and an object containing information of the logged in user
 
 > Example request:
 
@@ -170,7 +171,7 @@ APIs for managing task
 ## Get all tasks
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Get all registered tasks
+Get all registered tasks for authenticated user
 
 > Example request:
 
@@ -267,7 +268,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | The ID of the task
+    `id` |  required  | The UUID of the task
 
 <!-- END_7de0405fed5cd5226f5960f19b6ca3cd -->
 
@@ -275,7 +276,7 @@ Parameter | Status | Description
 ## Create an task
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Create a new task
+Create a new task and returns the id, title, date, createdAt, updatedAt, description, done fields of the newly created task
 
 > Example request:
 
@@ -285,7 +286,7 @@ curl -X POST \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU" \
-    -d '{"title":"culpa","description":"culpa","userId":"culpa","date":"culpa"}'
+    -d '{"title":"culpa","description":"culpa","date":"culpa","with":"culpa"}'
 
 ```
 
@@ -303,8 +304,8 @@ let headers = {
 let body = {
     "title": "culpa",
     "description": "culpa",
-    "userId": "culpa",
-    "date": "culpa"
+    "date": "culpa",
+    "with": "culpa"
 }
 
 fetch(url, {
@@ -333,8 +334,8 @@ Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
     `title` | string |  required  | Title for the task
         `description` | string |  optional  | Description for the task
-        `userId` | string |  required  | Task owner user ID
-        `date` | datetime |  required  | Occurrence date for the task
+        `date` | datetime |  required  | Occurrence date (in 'Y-m-d H:i' format) for the task
+        `with` | string[] |  optional  | e-mail array for shared task
     
 <!-- END_4da0d9b378428dcc89ced395d4a806e7 -->
 
@@ -342,7 +343,7 @@ Parameter | Type | Status | Description
 ## Update a task
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Update a task by id
+Update a task by id and return updated task info
 
 > Example request:
 
@@ -398,13 +399,13 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | The ID of the task
+    `id` |  required  | The UUID of the task
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `title` | string |  required  | Title for the task
+    `title` | string |  optional  | Title for the task
         `description` | string |  optional  | Description for the task
-        `date` | datetime |  required  | Occurrence date for the task
+        `date` | datetime |  optional  | Occurrence date for the task in 'Y-m-d H:i' format
     
 <!-- END_69075358732d924d06bc0709e0be43f6 -->
 
@@ -459,7 +460,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | The ID of the task
+    `id` |  required  | The UUID of the task
 
 <!-- END_64a33c367c5cefce2d1f64abcd08d2e9 -->
 
@@ -518,7 +519,7 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `file` | *.xlsx |  required  | Excel file containing the tasks
+    `file` | *.xlsx |  required  | Excel file containing the tasks. The file must contain a header with the title (required), description, date (required), and done {yes, no} columns
     
 <!-- END_5a85a90ea1cccae3b5e4744330f59350 -->
 
@@ -529,7 +530,7 @@ APIs for managing users
 ## Get all users
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Get all registered users
+Returns all registered users
 
 > Example request:
 
@@ -626,7 +627,7 @@ fetch(url, {
 
 Parameter | Status | Description
 --------- | ------- | ------- | -------
-    `id` |  required  | The ID of the user
+    `id` |  required  | The UUID of the user
 
 <!-- END_01075f2107bd5c278b05766440915f79 -->
 
@@ -644,7 +645,7 @@ curl -X PUT \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU" \
-    -d '{"email":"joao@gmail.com","phoneNumber":"(27) 99726-0000","cpf":"153.564.153-71"}'
+    -d '{"email":"joao@gmail.com","phoneNumber":"culpa","cpf":"culpa"}'
 
 ```
 
@@ -661,8 +662,8 @@ let headers = {
 
 let body = {
     "email": "joao@gmail.com",
-    "phoneNumber": "(27) 99726-0000",
-    "cpf": "153.564.153-71"
+    "phoneNumber": "culpa",
+    "cpf": "culpa"
 }
 
 fetch(url, {
@@ -694,9 +695,9 @@ Parameter | Status | Description
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `email` | string |  required  | The email address of the user
-        `phoneNumber` | string |  required  | The phone number of the user
-        `cpf` | string |  required  | the number of CPF document of the user
+    `email` | string |  optional  | The email address of the user. When updating the email, you will need to resend a confirmation email
+        `phoneNumber` | string |  optional  | The phone number of the user in '(XX) XXXXX-XXXX' format
+        `cpf` | strin |  optional  | string The number of CPF document of the user in 'XXX.XXX.XXX-XX' format
     
 <!-- END_9332edb67641ad6a0c477285396a59e6 -->
 
@@ -759,7 +760,7 @@ Parameter | Status | Description
 ## Create an user
 
 <br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
-Create an user and returns a JSON containing the new user's information including ID
+Create an user, returns  id, email, cpf, phoneNumber, emailVerifiedAt, createdAt, UpdatedAt fields of the newly created user and sends an email to the address informed to confirm the registration.
 
 > Example request:
 
@@ -829,11 +830,11 @@ fetch(url, {
 #### Body Parameters
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    `email` | string |  required  | The email address of the user
-        `password` | string |  required  | The password of the user
+    `email` | string |  required  | The e-mail address of the user
+        `password` | string |  required  | The password of the user (minLength: 6, maxLength:25)
         `confirmPassword` | string |  required  | The password confirmation of the user
-        `phoneNumber` | string |  required  | The phone number of the user
-        `cpf` | string |  required  | string The number of CPF document of the user
+        `phoneNumber` | string |  required  | The phone number of the user in '(XX) XXXXX-XXXX' format
+        `cpf` | string |  required  | string The number of CPF document of the user in 'XXX.XXX.XXX-XX' format
     
 <!-- END_12e37982cc5398c7100e59625ebb5514 -->
 
@@ -878,9 +879,9 @@ fetch(url, {
 {
     "variables": [],
     "info": {
-        "name": "VilaTaskReminder API",
-        "_postman_id": "5eb17cff-ab44-4013-b2f9-ade116f7223b",
-        "description": "",
+        "name": "VilaTaskReminder",
+        "_postman_id": "a74d85c1-27e1-498c-995e-88917d337b13",
+        "description": "An API for task schedule and reminder",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.0.0\/collection.json"
     },
     "item": [
@@ -889,7 +890,7 @@ fetch(url, {
             "description": "\n APIs for authenticate users",
             "item": [
                 {
-                    "name": "api\/auth\/password-change",
+                    "name": "Change password of the user",
                     "request": {
                         "url": {
                             "protocol": "http",
@@ -948,7 +949,7 @@ fetch(url, {
                             "mode": "raw",
                             "raw": "{\n    \"email\": \"culpa\",\n    \"password\": \"culpa\"\n}"
                         },
-                        "description": "Authenticate a user",
+                        "description": "Authenticate a user and returns the fields accessToken, tokenType, expiresIn and an object containing information of the logged in user",
                         "response": []
                     }
                 }
@@ -986,7 +987,7 @@ fetch(url, {
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "Get all registered tasks",
+                        "description": "Get all registered tasks for authenticated user",
                         "response": []
                     }
                 },
@@ -1003,7 +1004,7 @@ fetch(url, {
                                     "id": "id",
                                     "key": "id",
                                     "value": "3c8e83c5-f535-11ea-8572-5cc9d37d7d78",
-                                    "description": "The ID of the task"
+                                    "description": "The UUID of the task"
                                 }
                             ]
                         },
@@ -1056,9 +1057,9 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"title\": \"culpa\",\n    \"description\": \"culpa\",\n    \"userId\": \"culpa\",\n    \"date\": \"culpa\"\n}"
+                            "raw": "{\n    \"title\": \"culpa\",\n    \"description\": \"culpa\",\n    \"date\": \"culpa\",\n    \"with\": \"culpa\"\n}"
                         },
-                        "description": "Create a new task",
+                        "description": "Create a new task and returns the id, title, date, createdAt, updatedAt, description, done fields of the newly created task",
                         "response": []
                     }
                 },
@@ -1075,7 +1076,7 @@ fetch(url, {
                                     "id": "id",
                                     "key": "id",
                                     "value": "culpa",
-                                    "description": "The ID of the task"
+                                    "description": "The UUID of the task"
                                 }
                             ]
                         },
@@ -1115,7 +1116,7 @@ fetch(url, {
                                     "id": "id",
                                     "key": "id",
                                     "value": "culpa",
-                                    "description": "The ID of the task"
+                                    "description": "The UUID of the task"
                                 }
                             ]
                         },
@@ -1208,7 +1209,7 @@ fetch(url, {
                             "mode": "raw",
                             "raw": "[]"
                         },
-                        "description": "Get all registered users",
+                        "description": "Returns all registered users",
                         "response": []
                     }
                 },
@@ -1225,7 +1226,7 @@ fetch(url, {
                                     "id": "id",
                                     "key": "id",
                                     "value": "2e55ba0a-f524-11ea-8572-5cc9d37d7d78",
-                                    "description": "The ID of the user"
+                                    "description": "The UUID of the user"
                                 }
                             ]
                         },
@@ -1249,38 +1250,6 @@ fetch(url, {
                             "raw": "[]"
                         },
                         "description": "Get an user by id",
-                        "response": []
-                    }
-                },
-                {
-                    "name": "Create an user",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "localhost:8000",
-                            "path": "api\/users",
-                            "query": []
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Authorization",
-                                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
-                            }
-                        ],
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"email\": \"culpa\",\n    \"password\": \"culpa\",\n    \"confirmPassword\": \"culpa\",\n    \"phoneNumber\": \"culpa\",\n    \"cpf\": \"culpa\"\n}"
-                        },
-                        "description": "Create an user and returns a JSON containing the new user's information including ID",
                         "response": []
                     }
                 },
@@ -1318,7 +1287,7 @@ fetch(url, {
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"email\": \"joao@gmail.com\",\n    \"phoneNumber\": \"(27) 99726-0000\",\n    \"cpf\": \"153.564.153-71\"\n}"
+                            "raw": "{\n    \"email\": \"joao@gmail.com\",\n    \"phoneNumber\": \"culpa\",\n    \"cpf\": \"culpa\"\n}"
                         },
                         "description": "Update an user by id and return a JSON containing updated user information",
                         "response": []
@@ -1361,6 +1330,38 @@ fetch(url, {
                             "raw": "[]"
                         },
                         "description": "Destroy an user by id",
+                        "response": []
+                    }
+                },
+                {
+                    "name": "Create an user",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "localhost:8000",
+                            "path": "api\/users",
+                            "query": []
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9sb2dpbiIsImlhdCI6MTU5OTkzNTMwNywiZXhwIjoxNjAwMTUxMzA3LCJuYmYiOjE1OTk5MzUzMDcsImp0aSI6IjBDUFNRRXY4c253SmdBMHQiLCJzdWIiOiIyZTU1YmEwYS1mNTI0LTExZWEtODU3Mi01Y2M5ZDM3ZDdkNzgiLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.5nGyW1gVUr4Yj-W31ArveXp0iMwDqDJTXJ10LAU-qVU"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"culpa\",\n    \"password\": \"culpa\",\n    \"confirmPassword\": \"culpa\",\n    \"phoneNumber\": \"culpa\",\n    \"cpf\": \"culpa\"\n}"
+                        },
+                        "description": "Create an user, returns  id, email, cpf, phoneNumber, emailVerifiedAt, createdAt, UpdatedAt fields of the newly created user and sends an email to the address informed to confirm the registration.",
                         "response": []
                     }
                 }

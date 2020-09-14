@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\ApiException;
 use App\Http\Controllers\Controller;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -21,7 +22,7 @@ class AuthController extends Controller
     /**
      * Authenticate an user
      *
-     * Authenticate a user
+     * Authenticate a user and returns the fields accessToken, tokenType, expiresIn and an object containing information of the logged in user
      *
      * @bodyParam email string required The email address of the user
      * @bodyParam password string required The password of the user
@@ -86,10 +87,8 @@ class AuthController extends Controller
     }
 
     /**
-     * @authenticated
-     *
      * Change password of the user
-     *
+     * @authenticated
      * Update password of user by id
      *
      * @urlParam id required The ID of the user
@@ -124,7 +123,8 @@ class AuthController extends Controller
             throw new ApiException("Bad Credentials.", 401);
         }
 
-        $user->setPassword(Hash::make($request->password));
+        $user->setPassword(Hash::make($request->password))
+            ->setUpdatedAt(new DateTime());
 
         EntityManager::merge($user);
         EntityManager::flush();

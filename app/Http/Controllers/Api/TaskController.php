@@ -27,13 +27,12 @@ class TaskController extends Controller
     /**
      * Get all tasks
      *
-     * Get all registered tasks
+     * Get all registered tasks for authenticated user
      */
     public function findAll(Request $request)
     {
         $policy = new Policy\Auto;
         $policy->inside([
-            // 'createdAt' => new Policy\To\FormatDateTime(['format' => "Y_m_d"]),
             'user' => new Policy\To\Skip(),
         ]);
 
@@ -49,7 +48,7 @@ class TaskController extends Controller
      *
      * Get an task by id
      *
-     * @urlParam id required The ID of the task Example: 3c8e83c5-f535-11ea-8572-5cc9d37d7d78
+     * @urlParam id required The UUID of the task Example: 3c8e83c5-f535-11ea-8572-5cc9d37d7d78
      *
      */
     public function findById(Request $request)
@@ -92,12 +91,12 @@ class TaskController extends Controller
     /**
      * Create an task
      *
-     * Create a new task
+     * Create a new task and returns the id, title, date, createdAt, updatedAt, description, done fields of the newly created task
      *
      * @bodyParam title string required Title for the task
      * @bodyParam description string Description for the task
-     * @bodyParam userId string required Task owner user ID
-     * @bodyParam date datetime required Occurrence date for the task
+     * @bodyParam date datetime required Occurrence date (in 'Y-m-d H:i' format) for the task
+     * @bodyParam with string[] e-mail array for shared task
      *
      */
     public function create(Request $request)
@@ -117,30 +116,36 @@ class TaskController extends Controller
             ], 400);
         }
 
-
+        $authUser = $request->user('api');
         $task = new Task;
         $task->setTitle($request->title)
             ->setCreatedAt(new DateTime())
             ->setUpdatedAt(new DateTime())
             ->setDate(new DateTime($request->date))
-            ->setUser($request->user('api'));
+            ->setUser($authUser);
 
         EntityManager::persist($task);
 
 
-        foreach ($request->with as $email) {
-            $user = EntityManager::getRepository('App\User')->findOneByEmail($email);
+        if ($request->with) {
+            // Excludes the owner task
+            $with = array_filter($request->with, function ($email) use ($authUser) {
+                return $email !== $authUser->getEmail();
+            });
 
-            $joinTask = new Task;
-            $joinTask->setTitle($request->title)
-                ->setCreatedAt(new DateTime())
-                ->setUpdatedAt(new DateTime())
-                ->setDate(new DateTime($request->date))
-                ->setUser($user);
+            foreach ($with as $email) {
+                $user = EntityManager::getRepository('App\User')->findOneByEmail($email);
 
-            EntityManager::persist($joinTask);
+                $joinTask = new Task;
+                $joinTask->setTitle($request->title)
+                    ->setCreatedAt(new DateTime())
+                    ->setUpdatedAt(new DateTime())
+                    ->setDate(new DateTime($request->date))
+                    ->setUser($user);
+
+                EntityManager::persist($joinTask);
+            }
         }
-
         EntityManager::flush();
 
 
@@ -156,13 +161,13 @@ class TaskController extends Controller
     /**
      * Update a task
      *
-     * Update a task by id
+     * Update a task by id and return updated task info
      *
-     * @urlParam id required The ID of the task
+     * @urlParam id required The UUID of the task
      *
-     * @bodyParam title string required Title for the task
+     * @bodyParam title string  Title for the task
      * @bodyParam description string Description for the task
-     * @bodyParam date datetime required Occurrence date for the task
+     * @bodyParam date datetime Occurrence date for the task in 'Y-m-d H:i' format
      */
     public function update(Request $request)
     {
@@ -227,6 +232,8 @@ class TaskController extends Controller
             $task->setDone(false);
         }
 
+        $task->setUpdatedAt(new DateTime());
+
         EntityManager::merge($task);
         EntityManager::flush();
 
@@ -246,7 +253,7 @@ class TaskController extends Controller
      *
      * Destroy an task by id
      *
-     * @urlParam id required The ID of the task
+     * @urlParam id required The UUID of the task
      *
      */
     public function delete(Request $request)
@@ -286,7 +293,7 @@ class TaskController extends Controller
      *
      * Import tasks from .xlsx file
      *
-     * @bodyParam file *.xlsx required Excel file containing the tasks
+     * @bodyParam file *.xlsx required Excel file containing the tasks. The file must contain a header with the title (required), description, date (required), and done {yes, no} columns
      *
      */
     public function import(Request $request)

@@ -47,6 +47,9 @@ A versão em desenvolvimento da API pode ser acessada pelo endpoint: [http://dev
 
 Os detalhes dos endpoints, todas as rotas, parâmetros e suas respectivas restrições podem ser acessados <b>[aqui](http://dev.elyabe.com/api/doc)</b>. Nela também conta em anexo uma coleção do Postman pronta para uso.
 
+Ao atualizar a documentação, a nova versão pode ser disponibilizada executando o comando:
+    <pre>php artisan apidoc:generate [--force]</pre>
+
 ## :dark_sunglasses: Configurando ambiente de desenvolvimento
 
 
@@ -102,9 +105,9 @@ Recomendamos o [Postman](https://www.postman.com/) para realização de requisi�
 
 #### :pushpin: Pré-requisitos e limitações
 
-- Como não há tratamento de níveis de acesso, para este exemplo, só é permitido ao usuário 
-alterar e excluir seus próprios dados.
-
+- Como não há tratamento de níveis de acesso/permissões, para esta pequena API, só é permitido ao usuário 
+alterar e excluir seus próprios dados;
+- Não há suporte para as tarefas compartilhadas na função de importação de tarefas de um documento Excel;
 
 <!-- # :closed_book: Licença -->
 # :ghost: Problemas

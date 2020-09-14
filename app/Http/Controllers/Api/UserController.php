@@ -25,7 +25,7 @@ class UserController extends Controller
     /**
      * Get all users
      *
-     * Get all registered users
+     * Returns all registered users
      */
     public function findAll()
     {
@@ -47,7 +47,7 @@ class UserController extends Controller
      *
      * Get an user by id
      *
-     * @urlParam id required The ID of the user Example: 2e55ba0a-f524-11ea-8572-5cc9d37d7d78
+     * @urlParam id required The UUID of the user Example: 2e55ba0a-f524-11ea-8572-5cc9d37d7d78
      *
      */
     public function findById(Request $request)
@@ -91,13 +91,13 @@ class UserController extends Controller
     /**
      * Create an user
      *
-     * Create an user and returns a JSON containing the new user's information including ID
+     * Create an user, returns  id, email, cpf, phoneNumber, emailVerifiedAt, createdAt, UpdatedAt fields of the newly created user and sends an email to the address informed to confirm the registration.
      *
-     * @bodyParam email string required The email address of the user
-     * @bodyParam password string required The password of the user
+     * @bodyParam email string required The e-mail address of the user
+     * @bodyParam password string required The password of the user (minLength: 6, maxLength:25)
      * @bodyParam confirmPassword string required The password confirmation of the user
-     * @bodyParam phoneNumber string required The phone number of the user
-     * @bodyParam cpf string required string The number of CPF document of the user
+     * @bodyParam phoneNumber string required The phone number of the user in '(XX) XXXXX-XXXX' format
+     * @bodyParam cpf string required string The number of CPF document of the user in 'XXX.XXX.XXX-XX' format
      *
      */
     public function create(Request $request)
@@ -158,9 +158,9 @@ class UserController extends Controller
      *
      * @urlParam id required The ID of the user Example: 2e55ba0a-f524-11ea-8572-5cc9d37d7d78
      *
-     * @bodyParam email string required The email address of the user Example: joao@gmail.com
-     * @bodyParam phoneNumber string required The phone number of the user Example: (27) 99726-0000
-     * @bodyParam cpf string required the number of CPF document of the user Example: 153.564.153-71
+     * @bodyParam email string  The email address of the user. When updating the email, you will need to resend a confirmation email  Example: joao@gmail.com
+     * @bodyParam phoneNumber string  The phone number of the user in '(XX) XXXXX-XXXX' format
+     * @bodyParam cpf strin string The number of CPF document of the user in 'XXX.XXX.XXX-XX' format
      */
     public function update(Request $request)
     {
@@ -222,7 +222,7 @@ class UserController extends Controller
             $user->setCpf($params['cpf']);
         }
 
-
+        $user->setUpdatedAt(new DateTime());
 
         EntityManager::merge($user);
         EntityManager::flush();
